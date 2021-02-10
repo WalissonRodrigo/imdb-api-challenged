@@ -74,3 +74,12 @@ Você deverá criar uma API que o site [IMDb](https://www.imdb.com/) irá consul
   2. https://sailsjs.com/
 
 - Guideline rails http://guides.rubyonrails.org/index.html
+
+
+# Awesome Project Build with TypeORM
+
+Steps to run this project:
+
+1. Run `npm i` command
+2. Setup database settings inside `ormconfig.json` file
+3. Run `npm start` command
