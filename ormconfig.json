@@ -1,5 +1,5 @@
 [{
-   "name": "default",
+   "name": "secondary",
    "type": "mysql",
    "host": "localhost",
    "port": 3306,
@@ -23,7 +23,7 @@
       "subscribersDir": "src/subscriber"
    }
 },{
-   "name": "sqlite",
+   "name": "default",
    "type": "sqlite",
    "database": "database.sqlite",
    "synchronize": true,

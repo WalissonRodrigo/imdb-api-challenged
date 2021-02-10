@@ -6,7 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn
 } from "typeorm";
-import { Length, IsNotEmpty } from "class-validator";
+import { Length, IsNotEmpty, MinLength } from "class-validator";
 import * as bcrypt from "bcryptjs";
 
 @Entity()
@@ -17,12 +17,14 @@ export class User {
 
   @Column()
   @IsNotEmpty()
+  @MinLength(3)
   @Length(3, 20)
   name: string;
 
   @Column()
   @IsNotEmpty()
-  @Length(4, 20)
+  @MinLength(7)
+  @Length(7, 20)
   email: string;
 
   @Column()
