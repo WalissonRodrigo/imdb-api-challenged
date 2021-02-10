@@ -2,8 +2,9 @@ import "reflect-metadata";
 import { createConnection } from "typeorm";
 import * as express from "express";
 import * as bodyParser from "body-parser";
+import * as bcrypt from 'bcryptjs';
 import { Request, Response } from "express";
-import { Routes } from "./routes";
+import { Routes } from "./routes/user";
 import { User } from "./entity/User";
 
 createConnection().then(async connection => {
@@ -33,14 +34,16 @@ createConnection().then(async connection => {
 
     // insert new users for test
     await connection.manager.save(connection.manager.create(User, {
-        firstName: "Timber",
-        lastName: "Saw",
-        age: 27
+       name: "Walisson Rodrigo",
+       email: "walissonrodrigo@outlook.com",
+       password: bcrypt.hashSync("admin@123"),
+       role: 'admin'
     }));
     await connection.manager.save(connection.manager.create(User, {
-        firstName: "Phantom",
-        lastName: "Assassin",
-        age: 24
+        name: "IMDb User",
+        email: "user@imdb.com",
+        password: bcrypt.hashSync("user@123"),
+        role: 'user'
     }));
 
     console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
