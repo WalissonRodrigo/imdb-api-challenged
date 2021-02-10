@@ -2,50 +2,26 @@ import "reflect-metadata";
 import { createConnection } from "typeorm";
 import * as express from "express";
 import * as bodyParser from "body-parser";
-import * as bcrypt from 'bcryptjs';
-import { Request, Response } from "express";
-import { Routes } from "./routes/user";
-import { User } from "./entity/User";
+import * as helmet from "helmet";
+import * as cors from "cors";
+import routes from "./routes";
 
-createConnection().then(async connection => {
+//Connects to the Database -> then starts the express
+createConnection()
+    .then(async connection => {
+        // Create a new express application instance
+        const app = express();
 
-    // create express app
-    const app = express();
-    app.use(bodyParser.json());
+        // Call midlewares
+        app.use(cors());
+        app.use(helmet());
+        app.use(bodyParser.json());
 
-    // register express routes from defined application routes
-    Routes.forEach(route => {
-        (app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
-            const result = (new (route.controller as any))[route.action](req, res, next);
-            if (result instanceof Promise) {
-                result.then(result => result !== null && result !== undefined ? res.send(result) : undefined);
+        //Set all routes from routes folder
+        app.use("/", routes);
 
-            } else if (result !== null && result !== undefined) {
-                res.json(result);
-            }
+        app.listen(3000, () => {
+            console.log("Server started on port 3000!");
         });
-    });
-
-    // setup express app here
-    // ...
-
-    // start express server
-    app.listen(3000);
-
-    // insert new users for test
-    await connection.manager.save(connection.manager.create(User, {
-       name: "Walisson Rodrigo",
-       email: "walissonrodrigo@outlook.com",
-       password: bcrypt.hashSync("admin@123"),
-       role: 'admin'
-    }));
-    await connection.manager.save(connection.manager.create(User, {
-        name: "IMDb User",
-        email: "user@imdb.com",
-        password: bcrypt.hashSync("user@123"),
-        role: 'user'
-    }));
-
-    console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
-
-}).catch(error => console.log(error));
+    })
+    .catch(error => console.log(error));
