@@ -76,10 +76,16 @@ Você deverá criar uma API que o site [IMDb](https://www.imdb.com/) irá consul
 - Guideline rails http://guides.rubyonrails.org/index.html
 
 
-# Awesome Project Build with TypeORM
+# Executando o projeto Local em Express com TypeORM
 
-Steps to run this project:
+Siga as etapas para executar o projeto:
 
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+1. Execute no seu terminal o comando `npm i`
+2. Realize a configuração do seu banco de dados no arquivo`ormconfig.json`
+3. Execute o comando `npm start` para iniciar seu projeto.
+
+* Para criar um usuário administrador inicial basta executar o comando de migração para popular a base de dados enquanto o comando `npm start` já estiver em execução. Use o comando `npm run migration:run` ou `yarn migration:run` caso tenha o yarn instalado para criar um usuário com permissões de administrador. No console é possível acompanhar o resultado.
+
+* Todas as rotas usam o prefixo `/api` e requerem no header a cada requisição uma propriedade `authorization` que contém um token com o padrão `"Bearer " + access_token`
+
+> OBS: Caso não possua um banco de dados MySQL ou PostgreSQL instalados é possível usar o SQLite para fins de teste, para isso, basta alterar no arquivo`ormconfig.json` a propriedade `name` deixando o valor como `default` no driver sqlite e para o mysql como secondary ou outro nome qualquer. O valor default no driver desejado sempre será executado primeiro.
