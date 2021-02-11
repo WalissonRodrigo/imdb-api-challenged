@@ -86,10 +86,10 @@ class UserController {
             return;
         }
 
-        // Validate the new values on model
-        user.name = name;
-        user.email = email;
-        user.role = role || "USER";
+        // Validate the new values on model        
+        user.name = name || user.name;
+        user.email = email || user.email;
+        user.role = role || user.role;
         const errors = await validate(user);
         if (errors.length > 0) {
             res.status(400).send(errors);
@@ -119,7 +119,7 @@ class UserController {
             res.status(404).send("User not found");
             return;
         }
-        userRepository.delete(id);
+        userRepository.softDelete(id);
 
         // After all send a 204 (no content, but accepted) response
         res.status(204).send();
