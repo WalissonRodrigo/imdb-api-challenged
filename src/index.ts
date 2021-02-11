@@ -20,8 +20,8 @@ createConnection()
         //Set all routes from routes folder
         app.use("/api", routes);
 
-        app.listen(3000, () => {
-            console.log("Server started on port 3000!");
+        app.listen(process.env.PORT || 3000, () => {
+            console.log("🏃 Running Server");
         });
     })
     .catch(error => console.log(error));
