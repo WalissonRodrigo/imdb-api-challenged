@@ -6,9 +6,11 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  OneToMany,
 } from "typeorm";
 import { Length, IsNotEmpty, MinLength } from "class-validator";
 import * as bcrypt from "bcryptjs";
+import { RefreshToken } from "./RefreshToken";
 
 @Entity()
 @Unique(["email"])
@@ -36,11 +38,12 @@ export class User {
   @IsNotEmpty()
   role: string;
 
-  @Column()
+  @OneToMany(() => RefreshToken, (refreshToken) => refreshToken.user)
+  refreshTokens: RefreshToken;
+
   @CreateDateColumn()
   createdAt: Date;
 
-  @Column()
   @UpdateDateColumn()
   updatedAt: Date;
 

@@ -1,10 +1,19 @@
 import { Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
 import { getRepository } from "typeorm";
+import { v4 as uuid } from "uuid";
 import { validate } from "class-validator";
-
 import { User } from "../entity/User";
 import config from "../config/config";
+import { RefreshToken } from "../entity/RefreshToken";
+import moment = require("moment");
+import UserController from "./UserController";
+import {
+  isRefreshTokenExpired,
+  isRefreshTokenLinkedToToken,
+  isTokenValid,
+  tokenDecode,
+} from "../middlewares/checkJwt";
 
 class AuthController {
   /**
@@ -44,19 +53,23 @@ class AuthController {
    *                schema:
    *                  type: object
    *                  properties:
-   *                    access_token:
+   *                    accessToken:
    *                      type: string
    *                      description: Token JWT to access endpoints during one hour.
-   *                    type_token:
+   *                    typeToken:
    *                      type: string
    *                      description: Constant with prefix used in all requests
-   *                    expires_in:
+   *                    expiresIn:
    *                      type: integer
    *                      description: Eposh or UnixTimestamp to represent date and time limit to expire this token
+   *                    refreshToken:
+   *                      type: string
+   *                      description: When accessToken is expired this token can be used to renew the access regenerating a new accessToken and new refreshToken
    *                  example:
-   *                    access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-   *                    type_token: Constant with prefix used in all requests
-   *                    expires_in: UnixTimestamp with date and timer to expire this token
+   *                    accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+   *                    typeToken: Constant with prefix used in all requests
+   *                    expiresIn: UnixTimestamp with date and timer to expire this token
+   *                    refreshToken: 123abc78-9d1e-34f6-7g90-abcdefghijkl
    *          401:
    *            description: Unauthorised
    *          422:
@@ -87,18 +100,44 @@ class AuthController {
     // Sing JWT, valid for 1 hour
     const now = new Date();
     const expiresIn = now.setHours(now.getHours() + 1);
-    const token = jwt.sign(
-      { userId: user.id, email: user.email },
-      config.jwtSecret,
-      { expiresIn: "1h" }
+    const jwtId = uuid();
+    const token = await AuthController.generateRefreshTokenAndRefreshToken(
+      user,
+      jwtId
     );
 
     // Send the jwt in the response
     res.send({
-      access_token: token,
-      type_token: "Bearer",
-      expires_in: expiresIn.toString(),
+      accessToken: token.accessToken,
+      typeToken: "Bearer",
+      expiresIn: expiresIn.toString(),
+      refreshToken: token.refreshToken,
     });
+  };
+
+  private static generateRefreshTokenAndRefreshToken = async (
+    user: User,
+    jwtId: string
+  ): Promise<any> => {
+    // create new token
+    const accessToken = jwt.sign(
+      { userId: user.id, email: user.email },
+      config.jwtSecret,
+      {
+        expiresIn: "1h",
+        jwtid: jwtId,
+        subject: user.id.toString(),
+      }
+    );
+    // create new refreshToken
+    const refreshToken = new RefreshToken();
+    refreshToken.user = user;
+    refreshToken.jwtId = jwtId;
+    refreshToken.expireAt = moment().add(30, "days").toDate();
+    const refreshTokenRepository = getRepository(RefreshToken);
+    await refreshTokenRepository.save(refreshToken);
+
+    return { accessToken, refreshToken: refreshToken.id };
   };
 
   static changePassword = async (
@@ -125,7 +164,7 @@ class AuthController {
 
     // Check if old password matchs
     if (!user.checkIfUnencryptedPasswordIsValid(oldPassword)) {
-      res.status(401).send();
+      res.status(403).send();
       return;
     }
 
@@ -141,6 +180,74 @@ class AuthController {
     userRepository.save(user);
 
     res.status(204).send();
+  };
+
+  static refreshToken = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    const { accessToken, refreshToken: refreshTokenId } = req.body;
+
+    const refreshTokenRepository = getRepository(RefreshToken);
+    const userRepository = getRepository(User);
+    let user: User;
+    try {
+      // Confirm if token is valid
+      if (!isTokenValid(accessToken)) {
+        res.status(403).send("Bearer Token expired or invalid");
+        return;
+      }
+      const jwtPayload = tokenDecode(accessToken);
+      user = await userRepository.findOne(jwtPayload.userId);
+      if (!user) {
+        res.status(404).send("User not found");
+        return;
+      }
+      const refreshToken = await refreshTokenRepository.findOne(refreshTokenId);
+      // check token stored equals token encrypted in jwt
+      if (
+        !refreshToken ||
+        !isRefreshTokenLinkedToToken(refreshToken, jwtPayload.jti)
+      ) {
+        res.status(403).send("Bearer Token does not match with Refresh Token");
+        return;
+      }
+      // check token not expired
+      if (isRefreshTokenExpired(refreshToken)) {
+        refreshToken.invalidated = true;
+        refreshTokenRepository.save(refreshToken);
+        res.status(403).send("Refresh Token has expired");
+        return;
+      }
+      // check token not used or invalidated
+      if (refreshToken.used || refreshToken.invalidated) {
+        res.status(403).send("Refresh Token has been used or invalidated");
+        return;
+      }
+      refreshToken.used = true;
+      refreshTokenRepository.save(refreshToken);
+      const now = new Date();
+      const expiresIn = now.setHours(now.getHours() + 1);
+      const newRefreshToken = await AuthController.generateRefreshTokenAndRefreshToken(
+        user,
+        uuid()
+      );
+      res.status(201).send({
+        accessToken: newRefreshToken.accessToken,
+        typeToken: "Bearer",
+        expiresIn: expiresIn.toString(),
+        refreshToken: newRefreshToken.refreshToken,
+      });
+      return;
+    } catch (error) {
+      res.status(500).send("Internal error! Refresh Token not work.");
+      return;
+    }
+  };
+
+  static register = async (req: Request, res: Response): Promise<Response> => {
+    req.body.role = "USER";
+    return UserController.newUser(req, res);
   };
 }
 export default AuthController;

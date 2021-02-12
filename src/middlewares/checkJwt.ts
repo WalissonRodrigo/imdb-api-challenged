@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import * as jwt from "jsonwebtoken";
+import moment = require("moment");
 import config from "../config/config";
+import { RefreshToken } from "../entity/RefreshToken";
 
 export const checkJwt = (
   req: Request,
@@ -9,17 +11,28 @@ export const checkJwt = (
 ): void => {
   // Get the jwt token from the head
   const token = <string>req.headers.authorization;
-  let jwtPayload: { userId: any; email: any };
+  let jwtPayload: {
+    userId: any;
+    email: any;
+    iat: number;
+    exp: number;
+    sub: any;
+    jti: string;
+  };
 
   // Try to validate the token and get data
   try {
-    if (!token.includes("Bearer "))
-      throw new Error("Prefix Bearer Token not present in current token!");
-    jwtPayload = <any>(
-      jwt.verify(token.replace("Bearer ", ""), config.jwtSecret)
+    if (!isTokenValid(token)) throw new Error("Token is invalid!");
+    jwtPayload = <any>jwt.verify(
+      token.replace("Bearer ", ""),
+      config.jwtSecret,
+      {
+        ignoreExpiration: false,
+      }
     );
     res.locals.jwtPayload = jwtPayload;
   } catch (error) {
+    console.log(error);
     // If token is not valid, respond with 401 (unauthorized)
     res.status(401).send();
     return;
@@ -27,12 +40,64 @@ export const checkJwt = (
 
   // The token is valid for 1 hour
   // We want to send a new token on every request
-  const { userId, email } = jwtPayload;
+  const { userId, email, sub, jti } = jwtPayload;
   const newToken = jwt.sign({ userId, email }, config.jwtSecret, {
     expiresIn: "1h",
+    jwtid: jti,
+    subject: sub,
   });
   res.setHeader("token", newToken);
 
   // Call the next middleware or controller
   next();
+};
+
+export const isTokenValid = (token: string): boolean => {
+  try {
+    if (token && !token.includes("Bearer ")) return false;
+    if (
+      jwt.verify(token.replace("Bearer ", ""), config.jwtSecret, {
+        ignoreExpiration: false,
+      })
+    )
+      return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const tokenDecode = (token: string): any => {
+  let decode: {
+    userId: any;
+    email: any;
+    iat: number;
+    exp: number;
+    sub: any;
+    jti: string;
+  }
+  try {
+    decode = <any>jwt.verify(token.replace("Bearer ", ""), config.jwtSecret, {
+      ignoreExpiration: false,
+    })
+  } catch (error) {
+    console.log(error);
+    decode = undefined;
+  }
+  return decode;
+};
+
+export const isRefreshTokenLinkedToToken = (
+  refreshToken: RefreshToken,
+  jwtId: string
+): boolean => {
+  if (refreshToken.jwtId == jwtId) return true;
+  return false;
+};
+
+export const isRefreshTokenExpired = (refreshToken: RefreshToken): boolean => {
+  if (moment().isAfter(refreshToken.expireAt)) {
+    return true;
+  }
+  return false;
 };

@@ -198,7 +198,9 @@ class UserController {
     user.name = name;
     user.email = email;
     user.password = password;
-    user.role = role || "USER";
+    user.role =
+      (role && role.toUpperCase().includes("ADMIN") ? "ADMIN" : "USER") ||
+      "USER";
 
     // Validade if the parameters are ok
     const errors = await validate(user);
@@ -220,8 +222,9 @@ class UserController {
     }
     delete user.password;
     delete user.role;
+    delete user.deletedAt;
     // If all ok, send 201 response
-    res.status(201).send(user);
+    res.status(201).send({ id: user.id, ...user });
   };
 
   /**
