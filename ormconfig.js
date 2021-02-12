@@ -51,14 +51,17 @@ const builderConnection = () => {
     delete connection.password;
     delete connection.database;
   }
-  if (connection.url && prod) {
+  if (connection.type.toLowerCase() === "postgres") {
     connection.schema = "public";
-    connection.ssl = true;
     connection.extra = {
       ssl: {
-        rejectUnauthorized: false
+        rejectUnauthorized: false,
       },
     };
+  }
+
+  if (connection.url && prod) {
+    connection.ssl = true;
   }
   return connection;
 };
