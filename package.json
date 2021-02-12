@@ -18,18 +18,23 @@
     "class-validator": "^0.13.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "express": "^4.15.4",
+    "express": "^4.17.1",
     "helmet": "^4.4.1",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.14.1",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.10",
     "sqlite3": "^4.2.0",
+    "swagger-jsdoc": "^6.0.2",
+    "swagger-ui-express": "^4.1.6",
     "ts-node-dev": "^1.1.1",
     "typeorm": "0.2.31"
   },
   "devDependencies": {
     "@types/node": "^8.0.29",
+    "@typescript-eslint/eslint-plugin": "^4.15.0",
+    "@typescript-eslint/parser": "^4.15.0",
+    "eslint": "^7.19.0",
     "ts-node": "3.3.0",
     "typescript": "^3.8.3"
   },
@@ -39,6 +44,7 @@
     "prod": "NODE_ENV=production tsc && NODE_ENV=production node ./build/index.js",
     "start": "NODE_ENV=production node ./build/index.js",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "lint": "eslint --fix ./src/**/*.ts",
     "reset": "rm -rf node_modules/ && npm install && npm run tsc"
   }
 }

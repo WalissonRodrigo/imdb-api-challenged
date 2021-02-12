@@ -14,7 +14,7 @@ const builderUrl = () => {
   return DB_URL;
 };
 const builderConnection = () => {
-  const debug = process.env.NODE_ENV === 'production';
+  const prod = process.env.NODE_ENV === 'production';
   const connection = {
     name: "default",
     url: builderUrl(),
@@ -26,9 +26,9 @@ const builderConnection = () => {
     database: process.env.DB_NAME,
     synchronize: true,
     logging: false,
-    entities: [`${debug ? 'build' : 'src'}/entity/**/*.${debug ? 'js' : 'ts'}`],
-    migrations: [`${debug ? 'build' : 'src'}/migration/**/*.${debug ? 'js' : 'ts'}`],
-    subscribers: [`${debug ? 'build' : 'src'}/subscriber/**/*.${debug ? 'js' : 'ts'}`],
+    entities: [`${prod ? 'build' : 'src'}/entity/**/*.${prod ? 'js' : 'ts'}`],
+    migrations: [`${prod ? 'build' : 'src'}/migration/**/*.${prod ? 'js' : 'ts'}`],
+    subscribers: [`${prod ? 'build' : 'src'}/subscriber/**/*.${prod ? 'js' : 'ts'}`],
     cli: {
       entitiesDir: "src/entity",
       migrationsDir: "src/migration",
