@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
+import * as dotenv from 'dotenv';
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as helmet from "helmet";
@@ -10,7 +11,7 @@ import swaggerJSDoc = require("swagger-jsdoc");
 import swaggerUI = require("swagger-ui-express");
 
 import { swaggerDocument, swaggerOptions } from "../swagger.config";
-
+dotenv.config();
 //Connects to the Database -> then starts the express
 createConnection()
   .then(async () => {
@@ -31,14 +32,14 @@ createConnection()
     );
     //Set all routes from routes folder
     app.use("/api", routes);
-    app.use((req, res, next) => {
+    app.use((_req, _res, next) => {
       const error = new Error("Not found");
       error.status = 404;
       next(error);
     });
 
     // error handler middleware
-    app.use((error, req, res, next) => {
+    app.use((error, _req, res, _next) => {
       res.status(error.status || 500).send({
         error: {
           status: error.status || 500,
