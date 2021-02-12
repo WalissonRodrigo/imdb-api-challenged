@@ -11,7 +11,7 @@ import UserController from "./UserController";
 import {
   isRefreshTokenExpired,
   isRefreshTokenLinkedToToken,
-  isTokenValid,
+  isRefreshTokenValid,
   tokenDecode,
 } from "../middlewares/checkJwt";
 
@@ -127,6 +127,7 @@ class AuthController {
         expiresIn: "1h",
         jwtid: jwtId,
         subject: user.id.toString(),
+        algorithm: "HS512",
       }
     );
     // create new refreshToken
@@ -136,8 +137,17 @@ class AuthController {
     refreshToken.expireAt = moment().add(30, "days").toDate();
     const refreshTokenRepository = getRepository(RefreshToken);
     await refreshTokenRepository.save(refreshToken);
-
-    return { accessToken, refreshToken: refreshToken.id };
+    const refreshTokenSecure = jwt.sign(
+      { id: refreshToken.id, userId: user.id, email: user.email },
+      config.jwtSecret,
+      {
+        expiresIn: "30d",
+        jwtid: jwtId,
+        subject: user.id.toString(),
+        algorithm: "HS512",
+      }
+    );
+    return { accessToken, refreshToken: refreshTokenSecure };
   };
 
   static changePassword = async (
@@ -186,24 +196,19 @@ class AuthController {
     req: Request,
     res: Response
   ): Promise<Response> => {
-    const { accessToken, refreshToken: refreshTokenId } = req.body;
+    const { refreshToken: refreshTokenId } = req.body;
 
     const refreshTokenRepository = getRepository(RefreshToken);
     const userRepository = getRepository(User);
     let user: User;
     try {
       // Confirm if token is valid
-      if (!isTokenValid(accessToken)) {
-        res.status(403).send("Bearer Token expired or invalid");
+      if (!isRefreshTokenValid(refreshTokenId)) {
+        res.status(403).send("Refresh Token expired or invalid");
         return;
       }
-      const jwtPayload = tokenDecode(accessToken);
-      user = await userRepository.findOne(jwtPayload.userId);
-      if (!user) {
-        res.status(404).send("User not found");
-        return;
-      }
-      const refreshToken = await refreshTokenRepository.findOne(refreshTokenId);
+      const jwtPayload = tokenDecode(refreshTokenId);
+      const refreshToken = await refreshTokenRepository.findOne(jwtPayload.id);
       // check token stored equals token encrypted in jwt
       if (
         !refreshToken ||
@@ -222,6 +227,11 @@ class AuthController {
       // check token not used or invalidated
       if (refreshToken.used || refreshToken.invalidated) {
         res.status(403).send("Refresh Token has been used or invalidated");
+        return;
+      }
+      user = await userRepository.findOne(jwtPayload.userId.toString());
+      if (!user) {
+        res.status(404).send("User not found");
         return;
       }
       refreshToken.used = true;

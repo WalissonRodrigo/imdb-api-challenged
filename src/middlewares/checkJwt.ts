@@ -45,6 +45,7 @@ export const checkJwt = (
     expiresIn: "1h",
     jwtid: jti,
     subject: sub,
+    algorithm: "HS512",
   });
   res.setHeader("token", newToken);
 
@@ -67,19 +68,37 @@ export const isTokenValid = (token: string): boolean => {
   }
 };
 
+export const isRefreshTokenValid = (refreshToken: string): boolean => {
+  try {
+    let token = refreshToken;
+    if (token && token.includes("Bearer "))
+      token = token.replace("Bearer ", "");
+    if (
+      jwt.verify(token, config.jwtSecret, {
+        ignoreExpiration: false,
+      })
+    )
+      return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
 export const tokenDecode = (token: string): any => {
   let decode: {
+    id: any;
     userId: any;
     email: any;
     iat: number;
     exp: number;
     sub: any;
     jti: string;
-  }
+  };
   try {
     decode = <any>jwt.verify(token.replace("Bearer ", ""), config.jwtSecret, {
       ignoreExpiration: false,
-    })
+    });
   } catch (error) {
     console.log(error);
     decode = undefined;
