@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+var dotenv = require("dotenv");
+dotenv.config();
+
 const builderUrl = () => {
   if (process.env.DB_URL || process.env.DATABASE_URL) {
     return process.env.DB_URL || process.env.DATABASE_URL;
@@ -46,6 +50,12 @@ const builderConnection = () => {
     delete connection.username;
     delete connection.password;
     delete connection.database;
+  }
+  if (connection.url && prod) {
+    connection.schema = "public";
+    connection.extra = {
+      ssl: true,
+    };
   }
   return connection;
 };

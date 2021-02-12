@@ -40,7 +40,7 @@
   },
   "scripts": {
     "tsc": "tsc",
-    "dev": "set debug=true && NODE_ENV=dev ts-node-dev --respawn --transpile-only ./src/index.ts",
+    "dev": "set debug=false && NODE_ENV=production ts-node-dev --respawn --transpile-only ./src/index.ts",
     "prod": "NODE_ENV=production tsc && NODE_ENV=production node ./build/index.js",
     "start": "NODE_ENV=production node ./build/index.js",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
