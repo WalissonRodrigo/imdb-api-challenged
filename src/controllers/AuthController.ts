@@ -7,11 +7,53 @@ import { User } from "../entity/User";
 import config from "../config/config";
 
 class AuthController {
-  static login = async (req: Request, res: Response) => {
+  /**
+   * @swagger
+   *
+   *  paths:
+   *    /api/auth/login:
+   *      post:
+   *        description: Login to the application
+   *        tags:
+   *          - Auth
+   *        requestBody:
+   *          required: true
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                properties:
+   *                  email:
+   *                    type: string
+   *                  password:
+   *                    type: string
+   *                example:
+   *                  email: admin@admin.com
+   *                  password: admin@123
+   *        responses:
+   *          200:
+   *            description: login successful
+   *            content:
+   *              application/json:
+   *                schema:
+   *                  type: object
+   *                  properties:
+   *                    access_token:
+   *                      type: string
+   *                    type_token:
+   *                      type: string
+   *                    expires_in:
+   *                      type: integer
+   *          401:
+   *            description: Unauthorised
+   *          422:
+   *            description: validation error
+   */
+  static login = async (req: Request, res: Response): Promise<Response> => {
     // Check if email and password are set
-    let { email, password } = req.body;
+    const { email, password } = req.body;
     if (!(email && password)) {
-      res.status(400).send();
+      res.status(422).send();
     }
 
     // Get user from database
@@ -35,18 +77,21 @@ class AuthController {
     const token = jwt.sign(
       { userId: user.id, email: user.email },
       config.jwtSecret,
-      { expiresIn: '1h' }
+      { expiresIn: "1h" }
     );
 
     // Send the jwt in the response
     res.send({
       access_token: token,
-      type_token: 'Bearer',
+      type_token: "Bearer",
       expires_in: expiresIn.toString(),
     });
   };
 
-  static changePassword = async (req: Request, res: Response) => {
+  static changePassword = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
     // Get ID from JWT
     const id = res.locals.jwtPayload.userId;
 
