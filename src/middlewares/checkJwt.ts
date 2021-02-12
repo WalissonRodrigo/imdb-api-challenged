@@ -2,17 +2,21 @@ import { Request, Response, NextFunction } from "express";
 import * as jwt from "jsonwebtoken";
 import config from "../config/config";
 
-export const checkJwt = (req: Request, res: Response, next: NextFunction): void => {
+export const checkJwt = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
   // Get the jwt token from the head
   const token = <string>req.headers.authorization;
-  let jwtPayload: { userId: any; email: any; };
+  let jwtPayload: { userId: any; email: any };
 
   // Try to validate the token and get data
   try {
-    if (!token.includes('Bearer '))
-      throw new Error('Prefix Bearer Token not present in current token!');
+    if (!token.includes("Bearer "))
+      throw new Error("Prefix Bearer Token not present in current token!");
     jwtPayload = <any>(
-      jwt.verify(token.replace('Bearer ', ''), config.jwtSecret)
+      jwt.verify(token.replace("Bearer ", ""), config.jwtSecret)
     );
     res.locals.jwtPayload = jwtPayload;
   } catch (error) {
@@ -25,7 +29,7 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction): void 
   // We want to send a new token on every request
   const { userId, email } = jwtPayload;
   const newToken = jwt.sign({ userId, email }, config.jwtSecret, {
-    expiresIn: "1h"
+    expiresIn: "1h",
   });
   res.setHeader("token", newToken);
 

@@ -5,7 +5,7 @@ import {
   Unique,
   CreateDateColumn,
   UpdateDateColumn,
-  DeleteDateColumn
+  DeleteDateColumn,
 } from "typeorm";
 import { Length, IsNotEmpty, MinLength } from "class-validator";
 import * as bcrypt from "bcryptjs";
@@ -47,11 +47,11 @@ export class User {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  hashPassword() {
+  hashPassword(): void {
     this.password = bcrypt.hashSync(this.password, 8);
   }
 
-  checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
+  checkIfUnencryptedPasswordIsValid(unencryptedPassword: string): boolean {
     return bcrypt.compareSync(unencryptedPassword, this.password);
   }
 }
