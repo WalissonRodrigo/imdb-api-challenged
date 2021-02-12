@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import * as dotenv from 'dotenv';
+import * as dotenv from "dotenv";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import * as express from "express";
