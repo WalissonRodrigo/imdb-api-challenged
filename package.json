@@ -13,6 +13,7 @@
     "@types/cors": "^2.8.9",
     "@types/helmet": "^4.0.0",
     "@types/jsonwebtoken": "^8.5.0",
+    "@types/moment": "^2.13.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.1",
     "class-validator": "^0.13.1",
@@ -21,14 +22,14 @@
     "express": "^4.17.1",
     "helmet": "^4.4.1",
     "jsonwebtoken": "^8.5.1",
-    "mysql": "^2.14.1",
+    "moment": "^2.29.1",
     "pg": "^8.5.1",
     "reflect-metadata": "^0.1.10",
-    "sqlite3": "^4.2.0",
     "swagger-jsdoc": "^6.0.2",
     "swagger-ui-express": "^4.1.6",
     "ts-node-dev": "^1.1.1",
-    "typeorm": "0.2.31"
+    "typeorm": "0.2.31",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/node": "^8.0.29",
@@ -40,12 +41,12 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "set debug=false && NODE_ENV=production ts-node-dev --respawn --transpile-only ./src/index.ts",
+    "dev": "set debug=* && NODE_ENV=dev ts-node-dev --respawn --transpile-only ./src/index.ts",
     "prod": "NODE_ENV=production tsc && NODE_ENV=production node ./build/index.js",
     "start": "NODE_ENV=production node ./build/index.js",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
     "migration:prod": "heroku run npx typeorm migration:run",
     "lint": "eslint --fix ./src/**/*.ts",
-    "reset": "rm -rf node_modules/ && npm install && npm run tsc"
+    "reset": "rm -rf node_modules/ && npm install && npm run build"
   }
 }
