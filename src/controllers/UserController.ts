@@ -224,6 +224,51 @@ class UserController {
     res.status(201).send(user);
   };
 
+  /**
+   * @swagger
+   *
+   *  paths:
+   *    /api/user/{id}:
+   *      put:
+   *        description: Update user data
+   *        summary: Update user
+   *        security:
+   *          - Bearer: []
+   *        tags:
+   *          - User
+   *        parameters:
+   *          - in: path
+   *            name: id
+   *            schema:
+   *              type: integer
+   *            required: true
+   *            description: The user id
+   *        requestBody:
+   *          required: false
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                properties:
+   *                  name:
+   *                    type: string
+   *                  email:
+   *                    type: string
+   *                example:
+   *                  name: User
+   *                  email: user@gmail.com
+   *        responses:
+   *          200:
+   *            description: Updated
+   *            content:
+   *              application/json:
+   *                  schema:
+   *                    $ref: '#/components/schemas/User'
+   *          401:
+   *            description: Unauthorised
+   *          422:
+   *            description: validation error
+   */
   static editUser = async (req: Request, res: Response): Promise<Response> => {
     // Get the ID from the url
     const id = req.params.id;

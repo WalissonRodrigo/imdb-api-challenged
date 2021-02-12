@@ -17,7 +17,9 @@ class AuthController {
    *        tags:
    *          - Auth
    *        requestBody:
-   *          required: true
+   *          required:
+   *            - email
+   *            - password
    *          content:
    *            application/json:
    *              schema:
@@ -33,6 +35,10 @@ class AuthController {
    *        responses:
    *          200:
    *            description: login successful
+   *            headers:
+   *              Authorization:
+   *                schema:
+   *                  $ref: '#/components/headers/Authorization'
    *            content:
    *              application/json:
    *                schema:
@@ -40,10 +46,17 @@ class AuthController {
    *                  properties:
    *                    access_token:
    *                      type: string
+   *                      description: Token JWT to access endpoints during one hour.
    *                    type_token:
    *                      type: string
+   *                      description: Constant with prefix used in all requests
    *                    expires_in:
    *                      type: integer
+   *                      description: Eposh or UnixTimestamp to represent date and time limit to expire this token
+   *                  example:
+   *                    access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+   *                    type_token: Constant with prefix used in all requests
+   *                    expires_in: UnixTimestamp with date and timer to expire this token
    *          401:
    *            description: Unauthorised
    *          422:

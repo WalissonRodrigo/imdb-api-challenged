@@ -44,6 +44,7 @@
     "prod": "NODE_ENV=production tsc && NODE_ENV=production node ./build/index.js",
     "start": "NODE_ENV=production node ./build/index.js",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "migration:prod": "heroku run npx typeorm migration:run",
     "lint": "eslint --fix ./src/**/*.ts",
     "reset": "rm -rf node_modules/ && npm install && npm run tsc"
   }
