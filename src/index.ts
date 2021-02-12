@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import * as dotenv from 'dotenv';
 import "reflect-metadata";
 import { createConnection } from "typeorm";
-import * as dotenv from 'dotenv';
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as helmet from "helmet";
@@ -34,7 +35,7 @@ createConnection()
     app.use("/api", routes);
     app.use((_req, _res, next) => {
       const error = new Error("Not found");
-      error.status = 404;
+      // error.status = 404;
       next(error);
     });
 
