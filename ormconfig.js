@@ -53,8 +53,11 @@ const builderConnection = () => {
   }
   if (connection.url && prod) {
     connection.schema = "public";
+    connection.ssl = true;
     connection.extra = {
-      ssl: true,
+      ssl: {
+        rejectUnauthorized: false
+      },
     };
   }
   return connection;
