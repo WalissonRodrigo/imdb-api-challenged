@@ -3,9 +3,9 @@ import * as jwt from "jsonwebtoken";
 import { getRepository } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { validate } from "class-validator";
-import { User } from "../entity/User";
+import { User } from "../models/User";
 import config from "../config/config";
-import { RefreshToken } from "../entity/RefreshToken";
+import { RefreshToken } from "../models/RefreshToken";
 import moment = require("moment");
 import UserController from "./UserController";
 import {

@@ -1,6 +1,6 @@
 import { assert } from "chai";
 
-import { User } from "../entity/User";
+import { User } from "../models/User";
 import { TestFactory } from "../test/Factory";
 
 describe("Testing user controller", async () => {

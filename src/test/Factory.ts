@@ -31,7 +31,7 @@ export class TestFactory {
     location: "database",
     logging: false,
     synchronize: true,
-    entities: [`${prod ? "build" : "src"}/entity/**/*.${prod ? "js" : "ts"}`],
+    entities: [`${prod ? "build" : "src"}/models/**/*.${prod ? "js" : "ts"}`],
   };
 
   public get app(): supertest.SuperTest<supertest.Test> {

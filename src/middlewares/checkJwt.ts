@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import * as jwt from "jsonwebtoken";
 import moment = require("moment");
 import config from "../config/config";
-import { RefreshToken } from "../entity/RefreshToken";
+import { RefreshToken } from "../models/RefreshToken";
 
 export const checkJwt = (
   req: Request,

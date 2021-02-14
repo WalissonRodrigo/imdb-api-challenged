@@ -30,7 +30,7 @@ const builderConnection = () => {
     database: process.env.DB_NAME,
     synchronize: true,
     logging: false,
-    entities: [`${prod ? "build" : "src"}/entity/**/*.${prod ? "js" : "ts"}`],
+    entities: [`${prod ? "build" : "src"}/models/**/*.${prod ? "js" : "ts"}`],
     migrations: [
       `${prod ? "build" : "src"}/migration/**/*.${prod ? "js" : "ts"}`,
     ],
@@ -38,7 +38,7 @@ const builderConnection = () => {
       `${prod ? "build" : "src"}/subscriber/**/*.${prod ? "js" : "ts"}`,
     ],
     cli: {
-      entitiesDir: "src/entity",
+      entitiesDir: "src/models",
       migrationsDir: "src/migration",
       subscribersDir: "src/subscriber",
     },

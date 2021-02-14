@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { getRepository, MigrationInterface, QueryRunner } from "typeorm";
-import { User } from "../entity/User";
+import { User } from "../models/User";
 
 export class CreateAdminUser1612924013545 implements MigrationInterface {
   public async up(_queryRunner: QueryRunner): Promise<void> {
