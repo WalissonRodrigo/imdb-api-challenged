@@ -76,7 +76,7 @@ class UserController {
    *            description: unauthenticated
    *
    */
-  static listAll = async (req: Request, res: Response): Promise<Response> => {
+  static listAll = async (req: Request, res: Response): Promise<Response|any> => {
     // Get users from database
     const userRepository = getRepository(User);
     // Never send the passwords on response
@@ -138,9 +138,9 @@ class UserController {
   static getOneById = async (
     req: Request,
     res: Response
-  ): Promise<Response> => {
+  ): Promise<Response|User|any> => {
     // Get the ID from the url
-    const id: number = req.params.id;
+    const id = Number(req.params.id);
 
     // Get the user from database
     const userRepository = getRepository(User);

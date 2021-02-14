@@ -32,7 +32,6 @@ export const checkJwt = (
     );
     res.locals.jwtPayload = jwtPayload;
   } catch (error) {
-    console.log(error);
     // If token is not valid, respond with 401 (unauthorized)
     res.status(401).send();
     return;

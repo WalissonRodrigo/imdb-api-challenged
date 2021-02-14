@@ -8,7 +8,7 @@ export const checkRole = (roles: Array<string>) => {
     req: Request,
     res: Response,
     next: NextFunction
-  ): Promise<Response> => {
+  ): Promise<Response|any> => {
     //Get the user ID from previous midleware
     const id = res.locals.jwtPayload.userId;
 

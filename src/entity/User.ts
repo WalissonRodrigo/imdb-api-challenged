@@ -15,6 +15,16 @@ import { RefreshToken } from "./RefreshToken";
 @Entity()
 @Unique(["email"])
 export class User {
+  static mockTestUser(): User {
+    const user = new User();
+    user.id = 1;
+    user.email = "admin@admin.com";
+    user.password = "admin@123";
+    user.name = "Admin Teste";
+    user.role = "ADMIN";
+    // user.hashPassword();
+    return user;
+  }
   @PrimaryGeneratedColumn()
   id: number;
 
