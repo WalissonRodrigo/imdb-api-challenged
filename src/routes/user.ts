@@ -32,18 +32,25 @@ router.patch(
   UserController.editUser
 );
 
-// Delete one user
+// Logically deletes a user
 router.delete(
   "/:id([0-9]+)",
   [checkJwt, checkRole(["ADMIN"])],
   UserController.deleteUser
 );
 
-// Delete one user
+// Delete user by id forever
 router.delete(
   "/:id([0-9]+)/forever",
   [checkJwt, checkRole(["ADMIN"])],
   UserController.deleteUserForever
+);
+
+// Recover a logically deleted user
+router.post(
+  "/:id([0-9]+)/recover",
+  [checkJwt, checkRole(["ADMIN"])],
+  UserController.recover
 );
 
 export default router;

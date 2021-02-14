@@ -47,7 +47,6 @@ import { User } from "../entity/User";
  *           name: User Admin
  *           email: admin@admin.com
  *           password: admin@123
- *           role: 'ADMIN'
  */
 class UserController {
   /**
@@ -56,7 +55,8 @@ class UserController {
    *  paths:
    *    /api/user:
    *      get:
-   *        description: Get all users
+   *        description: Get array with all users.
+   *        summary: Get all users
    *        security:
    *          - Bearer: []
    *        tags:
@@ -65,12 +65,15 @@ class UserController {
    *          - application/json
    *        responses:
    *          200:
-   *            description: Array with all users not deleted
-   *            application/json:
-   *              schema:
-   *                $ref: '#/components/schemas/User'
+   *            description: Array with all users not deleted. Role ADMIN is needed to get this content.
+   *            content:
+   *              application/json:
+   *                schema:
+   *                  type: array
+   *                  items:
+   *                    $ref: '#/components/schemas/User'
    *          401:
-   *            description: Unauthorised
+   *            description: unauthenticated
    *
    */
   static listAll = async (req: Request, res: Response): Promise<Response> => {
@@ -82,7 +85,7 @@ class UserController {
     });
 
     // Send the users object
-    res.send(users);
+    res.status(200).send(users);
   };
 
   /**
@@ -92,7 +95,7 @@ class UserController {
    *      /api/user/{id}:
    *        get:
    *          description: Find one user using ID to return object User from database
-   *          summary: Gets a user by id
+   *          summary: Get a user by id
    *          security:
    *           - Bearer: []
    *          tags:
@@ -123,9 +126,13 @@ class UserController {
    *                     name: Admin
    *                     email: admin@admin.com
    *            401:
-   *              description: Unauthorised
+   *              description: unauthenticated
+   *            403:
+   *              description: Not authorized
    *            404:
-   *              description: User not found.
+   *              description: User not found
+   *            500:
+   *              description: Internal error!
    *
    */
   static getOneById = async (
@@ -142,7 +149,7 @@ class UserController {
       const user = await userRepository.findOneOrFail(id, {
         select: ["id", "name", "email"],
       });
-      res.send(user);
+      res.status(200).send(user);
     } catch (error) {
       res.status(404).send("User not found");
     }
@@ -154,7 +161,8 @@ class UserController {
    *  paths:
    *    /api/user:
    *      post:
-   *        description: Create a new user
+   *        description: Create a new user if you have role ADMIN.
+   *        summary: Create user
    *        security:
    *          - Bearer: []
    *        tags:
@@ -165,6 +173,10 @@ class UserController {
    *            application/json:
    *              schema:
    *                type: object
+   *                required:
+   *                  - name
+   *                  - email
+   *                  - password
    *                properties:
    *                  name:
    *                    type: string
@@ -174,22 +186,27 @@ class UserController {
    *                    type: string
    *                  role:
    *                    type: string
-   *                    required: false
    *                example:
    *                  name: User
    *                  email: user@gmail.com
    *                  password: admin@123
    *        responses:
-   *          200:
-   *            description: login successful
+   *          201:
+   *            description: User created
    *            content:
    *              application/json:
    *                  schema:
    *                    $ref: '#/components/schemas/User'
    *          401:
-   *            description: Unauthorised
+   *            description: unauthenticated
+   *          403:
+   *            description: Not authorized
+   *          409:
+   *            description: Email already in use
    *          422:
-   *            description: validation error
+   *            description: Validation error
+   *          500:
+   *            description: Internal error!
    */
   static newUser = async (req: Request, res: Response): Promise<Response> => {
     // Get parameters from the body
@@ -233,7 +250,7 @@ class UserController {
    *  paths:
    *    /api/user/{id}:
    *      put:
-   *        description: Update user data
+   *        description: Updates a user by id. Not all user properties are required.
    *        summary: Update user
    *        security:
    *          - Bearer: []
@@ -261,16 +278,18 @@ class UserController {
    *                  name: User
    *                  email: user@gmail.com
    *        responses:
-   *          200:
-   *            description: Updated
-   *            content:
-   *              application/json:
-   *                  schema:
-   *                    $ref: '#/components/schemas/User'
+   *          204:
+   *            description: Updated user
    *          401:
-   *            description: Unauthorised
+   *            description: unauthenticated
+   *          403:
+   *            description: Not authorized
+   *          404:
+   *            description: User not found
    *          422:
-   *            description: validation error
+   *            description: Validation error
+   *          500:
+   *            description: Internal error! Sorry, try again later :(
    */
   static editUser = async (req: Request, res: Response): Promise<Response> => {
     // Get the ID from the url
@@ -311,6 +330,39 @@ class UserController {
     res.status(204).send();
   };
 
+  /**
+   * @swagger
+   *
+   *  paths:
+   *    /api/user/{id}:
+   *      delete:
+   *        description: Logically deletes a user by id
+   *        summary: Delete user by id
+   *        security:
+   *          - Bearer: []
+   *        tags:
+   *          - User
+   *        parameters:
+   *          - in: path
+   *            name: id
+   *            schema:
+   *              type: integer
+   *            required: true
+   *            description: The user id
+   *        requestBody:
+   *          required: false
+   *        responses:
+   *          204:
+   *            description: Deleted user with success
+   *          401:
+   *            description: unauthenticated
+   *          403:
+   *            description: Not authorized
+   *          404:
+   *            description: User not found
+   *          500:
+   *            description: Internal error!
+   */
   static deleteUser = async (
     req: Request,
     res: Response
@@ -331,6 +383,39 @@ class UserController {
     res.status(204).send();
   };
 
+  /**
+   * @swagger
+   *
+   *  paths:
+   *    /api/user/{id}/forever:
+   *      delete:
+   *        description: Delete physical for user by id. This action is irreversible.
+   *        summary: Delete user by id forever
+   *        security:
+   *          - Bearer: []
+   *        tags:
+   *          - User
+   *        parameters:
+   *          - in: path
+   *            name: id
+   *            schema:
+   *              type: integer
+   *            required: true
+   *            description: The user id
+   *        requestBody:
+   *          required: false
+   *        responses:
+   *          204:
+   *            description: User successfully deleted forever
+   *          401:
+   *            description: unauthenticated
+   *          403:
+   *            description: Not authorized
+   *          404:
+   *            description: User not found
+   *          500:
+   *            description: Internal error! Sorry, try again later :(
+   */
   static deleteUserForever = async (
     req: Request,
     res: Response
@@ -354,7 +439,61 @@ class UserController {
       await userRepository.delete(id);
     } catch (error) {
       console.log(error);
-      res.status(500).send("Not possible remove this user! ");
+      res.status(500).send("Internal error! Sorry, try again later :(");
+      return;
+    }
+    // After all send a 204 (no content, but accepted) response
+    res.status(204).send();
+  };
+
+  /**
+   * @swagger
+   *
+   *  paths:
+   *    /api/user/{id}/recover:
+   *      post:
+   *        description: Recover a logically deleted user
+   *        summary: Recover user
+   *        security:
+   *          - Bearer: []
+   *        tags:
+   *          - User
+   *        parameters:
+   *          - in: path
+   *            name: id
+   *            schema:
+   *              type: integer
+   *            required: true
+   *            description: The user id
+   *        requestBody:
+   *          required: false
+   *        responses:
+   *          204:
+   *            description: User recovered with success
+   *          401:
+   *            description: Unauthenticated
+   *          403:
+   *            description: Not authorized
+   *          404:
+   *            description: User not found
+   *          500:
+   *            description: Internal error! Sorry, try again later :(
+   */
+  static recover = async (req: Request, res: Response): Promise<Response> => {
+    // Get the ID from the url
+    const id = req.params.id;
+
+    const userRepository = getRepository(User);
+    try {
+      await userRepository.restore(id);
+    } catch (error) {
+      res.status(500).send("Internal error! Sorry, try again later :(");
+      return;
+    }
+    try {
+      await userRepository.findOneOrFail(id);
+    } catch (error) {
+      res.status(404).send("User not found");
       return;
     }
     // After all send a 204 (no content, but accepted) response
