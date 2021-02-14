@@ -15,6 +15,30 @@ import {
   tokenDecode,
 } from "../middlewares/checkJwt";
 
+/**
+ * @swagger
+ *  components:
+ *    headers:
+ *      Authorization:
+ *        type: string
+ *        description: Token JWT to access and validation requests
+ *        example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+ *    refreshToken:
+ *      accessToken:
+ *        type: string
+ *        description: Token JWT to access endpoints during one hour.
+ *      typeToken:
+ *        type: string
+ *        description: Constant with prefix used in all requests
+ *      expiresIn:
+ *        type: integer
+ *        description: Eposh or UnixTimestamp to represent date and time limit to expire this token
+ *      refreshToken:
+ *        type: string
+ *        description: When accessToken is expired this token can be used to renew the access regenerating a new accessToken and new refreshToken
+ *
+ */
+
 class AuthController {
   /**
    * @swagger
@@ -22,17 +46,19 @@ class AuthController {
    *  paths:
    *    /api/auth/login:
    *      post:
-   *        description: Login to the application
+   *        description: Login to access the application
+   *        summary: Login to authentication
    *        tags:
    *          - Auth
    *        requestBody:
-   *          required:
-   *            - email
-   *            - password
+   *          required: true
    *          content:
    *            application/json:
    *              schema:
    *                type: object
+   *                required:
+   *                  - email
+   *                  - password
    *                properties:
    *                  email:
    *                    type: string
@@ -42,8 +68,7 @@ class AuthController {
    *                  email: admin@admin.com
    *                  password: admin@123
    *        responses:
-   *          200:
-   *            description: login successful
+   *          201:
    *            headers:
    *              Authorization:
    *                schema:
@@ -53,27 +78,16 @@ class AuthController {
    *                schema:
    *                  type: object
    *                  properties:
-   *                    accessToken:
-   *                      type: string
-   *                      description: Token JWT to access endpoints during one hour.
-   *                    typeToken:
-   *                      type: string
-   *                      description: Constant with prefix used in all requests
-   *                    expiresIn:
-   *                      type: integer
-   *                      description: Eposh or UnixTimestamp to represent date and time limit to expire this token
-   *                    refreshToken:
-   *                      type: string
-   *                      description: When accessToken is expired this token can be used to renew the access regenerating a new accessToken and new refreshToken
+   *                    $ref: '#/components/refreshToken'
    *                  example:
    *                    accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-   *                    typeToken: Constant with prefix used in all requests
-   *                    expiresIn: UnixTimestamp with date and timer to expire this token
-   *                    refreshToken: 123abc78-9d1e-34f6-7g90-abcdefghijkl
+   *                    typeToken: Bearer
+   *                    expiresIn: 1234568790123
+   *                    refreshToken: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9...
    *          401:
-   *            description: Unauthorised
+   *            description: Unauthenticated
    *          422:
-   *            description: validation error
+   *            description: Validation error
    */
   static login = async (req: Request, res: Response): Promise<Response> => {
     // Check if email and password are set
@@ -107,7 +121,7 @@ class AuthController {
     );
 
     // Send the jwt in the response
-    res.send({
+    res.status(201).send({
       accessToken: token.accessToken,
       typeToken: "Bearer",
       expiresIn: expiresIn.toString(),
@@ -150,48 +164,51 @@ class AuthController {
     return { accessToken, refreshToken: refreshTokenSecure };
   };
 
-  static changePassword = async (
-    req: Request,
-    res: Response
-  ): Promise<Response> => {
-    // Get ID from JWT
-    const id = res.locals.jwtPayload.userId;
-
-    // Get parameters from the body
-    const { oldPassword, newPassword } = req.body;
-    if (!(oldPassword && newPassword)) {
-      res.status(400).send();
-    }
-
-    // Get user from the database
-    const userRepository = getRepository(User);
-    let user: User;
-    try {
-      user = await userRepository.findOneOrFail(id);
-    } catch (id) {
-      res.status(401).send();
-    }
-
-    // Check if old password matchs
-    if (!user.checkIfUnencryptedPasswordIsValid(oldPassword)) {
-      res.status(403).send();
-      return;
-    }
-
-    // Validate de model (password lenght)
-    user.password = newPassword;
-    const errors = await validate(user);
-    if (errors.length > 0) {
-      res.status(400).send(errors);
-      return;
-    }
-    // Hash the new password and save
-    user.hashPassword();
-    userRepository.save(user);
-
-    res.status(204).send();
-  };
-
+  /**
+   * @swagger
+   *
+   *  paths:
+   *    /api/auth/refresh-token:
+   *      post:
+   *        description: Refresh Tokens not expired or invalid generating a new response with tokens valid
+   *        summary: Refresh Tokens
+   *        tags:
+   *          - Auth
+   *        requestBody:
+   *          required: true
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                required:
+   *                  - refreshToken
+   *                properties:
+   *                  refreshToken:
+   *                    type: string
+   *                example:
+   *                  refreshToken: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9...
+   *        responses:
+   *          201:
+   *            content:
+   *              application/json:
+   *                schema:
+   *                  type: object
+   *                  properties:
+   *                    $ref: '#/components/refreshToken'
+   *                  example:
+   *                    accessToken: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+   *                    typeToken: Bearer
+   *                    expiresIn: 1234568790123
+   *                    refreshToken: eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9...
+   *          401:
+   *            description: Unauthenticated
+   *          403:
+   *            description: Not authorized | Refresh Token expired or invalid | Bearer Token does not match with Refresh Token | Refresh Token has expired
+   *          404:
+   *            description: User not found
+   *          500:
+   *            description: Internal error! Sorry, try again later :(
+   */
   static refreshToken = async (
     req: Request,
     res: Response
@@ -250,14 +267,147 @@ class AuthController {
       });
       return;
     } catch (error) {
-      res.status(500).send("Internal error! Refresh Token not work.");
+      res.status(500).send("Internal error! Sorry, try again later :(");
       return;
     }
   };
 
+  /**
+   * @swagger
+   *
+   *  paths:
+   *    /api/auth/register:
+   *      post:
+   *        description: Register new users to using the basic about films in this Api
+   *        summary: Register new user
+   *        tags:
+   *          - Auth
+   *        requestBody:
+   *          required: true
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                required:
+   *                  - name
+   *                  - email
+   *                  - password
+   *                properties:
+   *                  name:
+   *                    type: string
+   *                  email:
+   *                    type: string
+   *                  password:
+   *                    type: string
+   *                  role:
+   *                    type: string
+   *                example:
+   *                  name: User
+   *                  email: user@gmail.com
+   *                  password: admin@123
+   *        responses:
+   *          201:
+   *            description: User created
+   *            content:
+   *              application/json:
+   *                  schema:
+   *                    $ref: '#/components/schemas/User'
+   *          409:
+   *            description: Email already in use
+   *          422:
+   *            description: Validation error
+   *          500:
+   *            description: Internal error!
+   */
   static register = async (req: Request, res: Response): Promise<Response> => {
     req.body.role = "USER";
     return UserController.newUser(req, res);
+  };
+
+  /**
+   * @swagger
+   *
+   *  paths:
+   *    /api/auth/change-password:
+   *      post:
+   *        description: Change password for user authenticated in Bearer Token.
+   *        summary: Change password
+   *        security:
+   *          - Bearer: []
+   *        tags:
+   *          - Auth
+   *        requestBody:
+   *          required:
+   *            - oldPassword
+   *            - newPassword
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                properties:
+   *                  oldPassword:
+   *                    type: string
+   *                    description: Current password for change and validation
+   *                  newPassword:
+   *                    type: string
+   *                    description: New password to changed
+   *                example:
+   *                  oldPassword: admin@123
+   *                  newPassword: newUser@123
+   *        responses:
+   *          204:
+   *            description: Password is changed with success!
+   *            headers:
+   *              Authorization:
+   *                schema:
+   *                  $ref: '#/components/headers/Authorization'
+   *          401:
+   *            description: Unauthenticated
+   *          403:
+   *            description: Not authorized
+   *          422:
+   *            description: Validation error
+   */
+  static changePassword = async (
+    req: Request,
+    res: Response
+  ): Promise<Response> => {
+    // Get ID from JWT
+    const id = res.locals.jwtPayload.userId;
+
+    // Get parameters from the body
+    const { oldPassword, newPassword } = req.body;
+    if (!(oldPassword && newPassword)) {
+      res.status(400).send();
+    }
+
+    // Get user from the database
+    const userRepository = getRepository(User);
+    let user: User;
+    try {
+      user = await userRepository.findOneOrFail(id);
+    } catch (id) {
+      res.status(401).send();
+    }
+
+    // Check if old password matchs
+    if (!user.checkIfUnencryptedPasswordIsValid(oldPassword)) {
+      res.status(403).send();
+      return;
+    }
+
+    // Validate de model (password lenght)
+    user.password = newPassword;
+    const errors = await validate(user);
+    if (errors.length > 0) {
+      res.status(400).send(errors);
+      return;
+    }
+    // Hash the new password and save
+    user.hashPassword();
+    userRepository.save(user);
+
+    res.status(204).send();
   };
 }
 export default AuthController;
