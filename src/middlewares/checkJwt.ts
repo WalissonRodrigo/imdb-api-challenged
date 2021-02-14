@@ -40,24 +40,26 @@ export const checkJwt = (
 
   // The token is valid for 1 hour
   // We want to send a new token on every request
-  const { userId, email, sub, jti } = jwtPayload;
-  const newToken = jwt.sign({ userId, email }, config.jwtSecret, {
-    expiresIn: "1h",
-    jwtid: jti,
-    subject: sub,
-    algorithm: "HS512",
-  });
-  res.setHeader("token", newToken);
+  // const { userId, email, sub, jti } = jwtPayload;
+  // const newToken = jwt.sign({ userId, email }, config.jwtSecret, {
+  //   expiresIn: "1h",
+  //   jwtid: jti,
+  //   subject: sub,
+  //   algorithm: "HS512",
+  // });
+  // res.setHeader("token", newToken);
 
   // Call the next middleware or controller
   next();
 };
 
-export const isTokenValid = (token: string): boolean => {
+export const isTokenValid = (accessToken: string): boolean => {
   try {
+    let token = accessToken;
     if (token && !token.includes("Bearer ")) return false;
+    else token = token.replace("Bearer ", "");
     if (
-      jwt.verify(token.replace("Bearer ", ""), config.jwtSecret, {
+      jwt.verify(token, config.jwtSecret, {
         ignoreExpiration: false,
       })
     )
@@ -66,6 +68,7 @@ export const isTokenValid = (token: string): boolean => {
     console.log(error);
     return false;
   }
+  return false;
 };
 
 export const isRefreshTokenValid = (refreshToken: string): boolean => {
