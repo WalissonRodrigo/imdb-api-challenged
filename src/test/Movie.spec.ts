@@ -8,7 +8,10 @@ describe("Testing movie controller", () => {
   let auth;
   const factory: TestFactory = new TestFactory();
   const testMovie: Movie = Movie.mockTestMovie();
-  const testMovieModified: Movie = {...testMovie, title: "Test Filme Updated"}
+  const testMovieModified: Movie = {
+    ...testMovie,
+    title: "Test Filme Updated",
+  };
   const testUser: User = User.mockTestUser();
 
   const login = () => {
