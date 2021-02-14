@@ -4,6 +4,7 @@ import "reflect-metadata";
 import express from "express";
 import bodyParser from "body-parser";
 import helmet from "helmet";
+import { pagination } from "typeorm-pagination";
 import cors from "cors";
 import routes from "./routes";
 import swaggerJSDoc = require("swagger-jsdoc");
@@ -18,6 +19,7 @@ export default class App {
     this._app.use(express.urlencoded({ extended: true }));
     this._app.use(express.json());
     this._app.use(cors());
+    this._app.use(pagination);
     this._app.use(helmet());
     this._app.use(bodyParser.json());
     const swaggerDocs = swaggerJSDoc(swaggerDocument);
@@ -31,7 +33,7 @@ export default class App {
     this._app.use("/api", routes);
     this._app.use((_req, _res, next) => {
       const error = new Error("Not found");
-      error['status'] = 404;
+      error["status"] = 404;
       next(error);
     });
 
