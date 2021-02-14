@@ -1,4 +1,4 @@
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 import "reflect-metadata";
 
 // Set env variables from .env file
@@ -7,8 +7,8 @@ dotenv.config();
 import { createConnection, ConnectionOptions, Connection } from "typeorm";
 import { createServer, Server as HttpServer } from "http";
 
-import * as express from "express";
-import * as supertest from "supertest";
+import express from "express";
+import supertest from "supertest";
 
 import Server from "../app";
 
@@ -26,12 +26,24 @@ export class TestFactory {
 
   // DB connection options
   private options: ConnectionOptions = {
+    name: "default",
     type: "sqljs",
     database: new Uint8Array(),
     location: "database",
     logging: false,
     synchronize: true,
     entities: [`${prod ? "build" : "src"}/models/**/*.${prod ? "js" : "ts"}`],
+    migrations: [
+      `${prod ? "build" : "src"}/migration/**/*.${prod ? "js" : "ts"}`,
+    ],
+    subscribers: [
+      `${prod ? "build" : "src"}/subscriber/**/*.${prod ? "js" : "ts"}`,
+    ],
+    cli: {
+      entitiesDir: "src/models",
+      migrationsDir: "src/migration",
+      subscribersDir: "src/subscriber",
+    },
   };
 
   public get app(): supertest.SuperTest<supertest.Test> {

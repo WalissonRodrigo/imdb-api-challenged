@@ -9,7 +9,7 @@ import {
   OneToMany,
 } from "typeorm";
 import { Length, IsNotEmpty, MinLength } from "class-validator";
-import * as bcrypt from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { RefreshToken } from "./RefreshToken";
 
 @Entity()
@@ -22,7 +22,7 @@ export class User {
     user.password = "admin@123";
     user.name = "Admin Teste";
     user.role = "ADMIN";
-    // user.hashPassword();
+    user.hashPassword();
     return user;
   }
   @PrimaryGeneratedColumn()

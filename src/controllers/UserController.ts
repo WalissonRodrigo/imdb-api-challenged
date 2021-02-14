@@ -149,7 +149,7 @@ class UserController {
       const user = await userRepository.findOneOrFail(id, {
         select: ["id", "name", "email"],
       });
-      res.status(200).send(user);
+      res.status(200).json(user);
     } catch (error) {
       res.status(404).send("User not found");
     }

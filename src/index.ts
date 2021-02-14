@@ -1,7 +1,7 @@
 import "reflect-metadata";
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 import { Connection, createConnection } from "typeorm";
-import * as express from "express";
+import express from "express";
 import App from "./app";
 import { createServer, Server as HttpServer } from 'http';
 dotenv.config();

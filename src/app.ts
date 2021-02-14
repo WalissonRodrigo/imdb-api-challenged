@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 import "reflect-metadata";
-import * as express from "express";
-import * as bodyParser from "body-parser";
-import * as helmet from "helmet";
-import * as cors from "cors";
+import express from "express";
+import bodyParser from "body-parser";
+import helmet from "helmet";
+import cors from "cors";
 import routes from "./routes";
 import swaggerJSDoc = require("swagger-jsdoc");
 import swaggerUI = require("swagger-ui-express");

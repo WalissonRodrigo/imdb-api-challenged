@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import * as jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { getRepository } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { validate } from "class-validator";

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import * as jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import moment = require("moment");
 import config from "../config/config";
 import { RefreshToken } from "../models/RefreshToken";
@@ -33,7 +33,8 @@ export const checkJwt = (
     res.locals.jwtPayload = jwtPayload;
   } catch (error) {
     // If token is not valid, respond with 401 (unauthorized)
-    res.status(401).send();
+    // if(process.env.NODE_ENV === "test") return next();
+    res.status(401).send("Unauthenticated");
     return;
   }
 
@@ -64,7 +65,6 @@ export const isTokenValid = (accessToken: string): boolean => {
     )
       return true;
   } catch (error) {
-    console.log(error);
     return false;
   }
   return false;
@@ -82,7 +82,6 @@ export const isRefreshTokenValid = (refreshToken: string): boolean => {
     )
       return true;
   } catch (error) {
-    console.log(error);
     return false;
   }
 };
@@ -102,7 +101,6 @@ export const tokenDecode = (token: string): any => {
       ignoreExpiration: false,
     });
   } catch (error) {
-    console.log(error);
     decode = undefined;
   }
   return decode;
