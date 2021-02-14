@@ -34,9 +34,9 @@ export class Movie {
     movie.title = "Fight Club";
     movie.voteAverage = 7.8;
     movie.voteCount = 3439;
-    movie.actors = <Actor[]>[{ id: 1 }, { id: 2 }];
-    movie.companies = <Company[]>[{ id: 1 }, { id: 2 }];
-    movie.genres = <Genre[]>[{ id: 2 }, { id: 4 }, { id: 7 }];
+    // movie.actors = <Actor[]>[{ id: 1 }, { id: 2 }];
+    // movie.companies = <Company[]>[{ id: 1 }, { id: 2 }];
+    // movie.genres = <Genre[]>[{ id: 2 }, { id: 4 }, { id: 7 }];
     return movie;
   }
   @PrimaryGeneratedColumn()
@@ -59,7 +59,7 @@ export class Movie {
   @Column()
   tagline: string;
 
-  @Column()
+  @Column({nullable: true})
   posterPath: string;
 
   @Column({ default: statusList[0] })
@@ -80,7 +80,7 @@ export class Movie {
   @Column({ default: 0 })
   voteCount: number;
 
-  @Column()
+  @Column({nullable: true})
   releaseDate: Date;
 
   @ManyToMany(() => Company, (company) => company.movies)

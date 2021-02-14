@@ -11,6 +11,7 @@ describe("Testing movie controller", () => {
   const testMovieModified: Movie = {
     ...testMovie,
     title: "Test Filme Updated",
+    originalTitle: "Test Filme"
   };
   const testUser: User = User.mockTestUser();
 
@@ -35,6 +36,7 @@ describe("Testing movie controller", () => {
   before(async () => {
     await factory.init();
     await getRepository(User).save(testUser);
+    await getRepository(Movie).save(testMovie);
     login();
   });
 
@@ -57,7 +59,9 @@ describe("Testing movie controller", () => {
         .post("/api/movie")
         .send({
           ...testMovie,
+          id: 2,
           title: "Second Test Filme",
+          originalTitle: "Test Filme 2"
         })
         .set("Authorization", `Bearer ${auth.accessToken}`)
         .set("Content-Type", "application/json")
