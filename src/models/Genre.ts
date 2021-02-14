@@ -5,7 +5,6 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToMany,
-  JoinTable,
 } from "typeorm";
 import { Length, IsNotEmpty, MinLength } from "class-validator";
 import { Movie } from "./Movie";
@@ -41,7 +40,6 @@ export class Genre {
   name: string;
 
   @ManyToMany(() => Movie, (movie) => movie.genres)
-  @JoinTable()
   movies: Movie[];
 
   @CreateDateColumn()
