@@ -244,7 +244,7 @@ class MovieController {
       return;
     }
     // If all ok, send 201 response
-    res.status(201).send({ id: movie.id, ...movie });
+    res.status(201).json({ id: movie.id, ...movie });
   };
 
   /**
@@ -290,24 +290,26 @@ class MovieController {
     // Get the ID from the url
     const id = req.params.id;
 
-    // Get values from the body
-    const { name, email, role } = req.body;
+    let movie: Movie; // to restore current in database
+    const movieUpdate = new Movie(); // to update result database
+    delete movieUpdate.id; // prevent user send id wrong on body
+    delete movieUpdate.deletedAt; // prevent user remove movie using endpoint wrong.
+    // Get parameters from the body
+    Object.keys(req.body).forEach((item) => {
+      movieUpdate[item] = req.body[item];
+    });
 
     // Try to find movie on database
     const movieRepository = getRepository(Movie);
-    let movie;
     try {
       movie = await movieRepository.findOneOrFail(id);
+      movie = { ...movie, ...movieUpdate };
     } catch (error) {
       // If not found, send a 404 response
       res.status(404).send("Movie not found");
       return;
     }
 
-    // Validate the new values on model
-    movie.name = name || movie.name;
-    movie.email = email || movie.email;
-    movie.role = role || movie.role;
     const errors = await validate(movie);
     if (errors.length > 0) {
       res.status(400).send(errors);
@@ -493,6 +495,73 @@ class MovieController {
     }
     // After all send a 204 (no content, but accepted) response
     res.status(204).send();
+  };
+
+  /**
+   * @swagger
+   *
+   *  paths:
+   *    /api/movie/rate:
+   *      post:
+   *        description: Rate a movie to change your avarage
+   *        summary: Rate a movie
+   *        security:
+   *          - Bearer: []
+   *        tags:
+   *          - Movie
+   *        requestBody:
+   *          required: true
+   *          content:
+   *            application/json:
+   *              schema:
+   *                type: object
+   *                required:
+   *                 - id
+   *                 - rate
+   *                properties:
+   *                  id:
+   *                    type: integer
+   *                    description: The id of the movie.
+   *                    example: 1
+   *                  rate:
+   *                    type: number
+   *                    description: Your rating starting of 0 (zero) than 4 (four) max
+   *                    example: 3.5
+   *        responses:
+   *          201:
+   *            description: Movie rated with success
+   *          401:
+   *            description: Unauthenticated
+   *          403:
+   *            description: Not authorized
+   *          404:
+   *            description: Movie not found
+   *          500:
+   *            description: Internal error! Sorry, try again later :(
+   */
+  static rate = async (req: Request, res: Response): Promise<Response> => {
+    // Get the ID and Rate from the url
+    const { id, rate } = req.body;
+    let movie: Movie;
+    const movieRepository = getRepository(Movie);
+    try {
+      movie = await movieRepository.findOneOrFail(id);
+    } catch (error) {
+      res.status(404).send("Movie not found");
+      return;
+    }
+    try {
+      // caculating new average using reverse calc
+      movie.voteAverage =
+        (movie.voteCount * movie.voteAverage + rate) / movie.voteCount++;
+      movie.voteCount += 1;
+      await movieRepository.save(movie);
+    } catch (error) {
+      res.status(500).send("Internal error! Sorry, try again later :(");
+      return;
+    }
+    // After all send a 201 response
+    res.status(201).json({ id: movie.id, ...movie });
   };
 }
 

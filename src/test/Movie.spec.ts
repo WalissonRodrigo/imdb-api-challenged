@@ -1,4 +1,4 @@
-import { assert } from "chai";
+import { assert, expect } from "chai";
 import { Movie } from "../models/Movie";
 import { User } from "../models/User";
 import { TestFactory } from "./Factory";
@@ -61,7 +61,9 @@ describe("Testing movie controller", () => {
           ...testMovie,
           id: 2,
           title: "Second Test Filme",
-          originalTitle: "Test Filme 2"
+          originalTitle: "Test Filme 2",
+          voteCount: 150,
+          voteAverage: 3.5
         })
         .set("Authorization", `Bearer ${auth.accessToken}`)
         .set("Content-Type", "application/json")
@@ -72,6 +74,30 @@ describe("Testing movie controller", () => {
             if (err) throw err;
             const movie: Movie = res.body;
             assert.isObject(movie, "movie should be an object");
+            return done();
+          } catch (error) {
+            return done();
+          }
+        });
+    });
+    it("Rate Movie responds with status 201", (done) => {
+      factory.app
+        .post("/api/movie/rate")
+        .send({
+          id: 2,
+          rate: 1.5
+        })
+        .set("Authorization", `Bearer ${auth.accessToken}`)
+        .set("Content-Type", "application/json")
+        .set("Accept", "application/json")
+        .expect(201)
+        .expect("Content-Type", /json/)
+        .end((err, res) => {
+          try {
+            if (err) throw err;
+            const movie: Movie = res.body;
+            assert.isObject(movie, "movie should be an object");
+            expect(movie.voteAverage).to.equal(3.486754967);
             return done();
           } catch (error) {
             return done();

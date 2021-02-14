@@ -6,12 +6,12 @@ import { checkRole } from "../middlewares/checkRole";
 const router = Router();
 
 // Get all users
-router.get("/", [checkJwt, checkRole(["ADMIN"])], MovieController.listAll);
+router.get("/", [checkJwt, checkRole(["ADMIN", "USER"])], MovieController.listAll);
 
 // Get one user
 router.get(
   "/:id([0-9]+)",
-  [checkJwt, checkRole(["ADMIN"])],
+  [checkJwt, checkRole(["ADMIN", "USER"])],
   MovieController.getOneById
 );
 
@@ -51,6 +51,13 @@ router.post(
   "/:id([0-9]+)/recover",
   [checkJwt, checkRole(["ADMIN"])],
   MovieController.recover
+);
+
+// Rate on movie
+router.post(
+  "rate",
+  [checkJwt, checkRole(["ADMIN", "USER"])],
+  MovieController.rate
 );
 
 export default router;
