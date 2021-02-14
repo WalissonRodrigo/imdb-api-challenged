@@ -57,7 +57,7 @@
     "migration:prod": "heroku run npx typeorm migration:run",
     "deploy": "git push heroku",
     "lint": "eslint --fix ./src/**/*.ts",
-    "test": "NODE_ENV=test tsc && ts-mocha",
+    "test": "ts-mocha",
     "reset": "rm -rf node_modules/ && npm install && npm run build"
   }
 }

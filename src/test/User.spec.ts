@@ -1,10 +1,10 @@
 import { assert } from "chai";
 import { User } from "../models/User";
-import { TestFactory } from "../test/Factory";
+import { TestFactory } from "./Factory";
 import { getRepository } from "typeorm";
 
 describe("Testing user controller", () => {
-  let auth = { accessToken: "" };
+  let auth;
   const factory: TestFactory = new TestFactory();
   const testUser: User = User.mockTestUser();
   const testUserModified: User = <User>{ ...testUser, name: "Admin Updated" };
@@ -38,7 +38,7 @@ describe("Testing user controller", () => {
   });
 
   describe("POST /user", () => {
-    it("responds with status 400", (done) => {
+    it("Invalid request to create user responds with status 400", (done) => {
       factory.app
         .post("/api/user")
         .set("Authorization", `Bearer ${auth.accessToken}`)
@@ -47,7 +47,7 @@ describe("Testing user controller", () => {
         .expect(400, done);
     });
 
-    it("responds with new user", (done) => {
+    it("Create new user responds with status 201", (done) => {
       factory.app
         .post("/api/user")
         .send({
@@ -74,7 +74,7 @@ describe("Testing user controller", () => {
   });
 
   describe("GET /user", () => {
-    it("responds with user array", (done) => {
+    it("Get user array responds with status 200", (done) => {
       factory.app
         .get("/api/user")
         .set("Authorization", `Bearer ${auth.accessToken}`)
@@ -94,7 +94,7 @@ describe("Testing user controller", () => {
     });
   });
   describe("PUT /user/1", () => {
-    it("responds with updated user", (done) => {
+    it("Updated user responds with status 204", (done) => {
       factory.app
         .put("/api/user/1")
         .auth(auth.accessToken, { type: "bearer" })
@@ -108,7 +108,7 @@ describe("Testing user controller", () => {
   });
 
   describe("GET /user/2", () => {
-    it("responds with single user", (done) => {
+    it("Get single user responds with status 200", (done) => {
       factory.app
         .get("/api/user/2")
         .set("Authorization", `Bearer ${auth.accessToken}`)
@@ -129,7 +129,7 @@ describe("Testing user controller", () => {
   });
 
   describe("DELETE /user/2", () => {
-    it("responds with status 204", (done) => {
+    it("Delete logic responds with status 204", (done) => {
       factory.app
         .delete("/api/user/2")
         .set("Authorization", `Bearer ${auth.accessToken}`)
@@ -138,13 +138,31 @@ describe("Testing user controller", () => {
         .expect(204, done);
     });
 
-    it("responds with status 404", (done) => {
+    it("Delete logic before deleted responds with status 404", (done) => {
       factory.app
         .delete("/api/user/2")
         .set("Authorization", `Bearer ${auth.accessToken}`)
         .set("Content-Type", "application/json")
         .set("Accept", "application/json")
         .expect(404, done);
+    });
+
+    it("Recover deleted responds with status 204", (done) => {
+      factory.app
+        .post("/api/user/2/recover")
+        .set("Authorization", `Bearer ${auth.accessToken}`)
+        .set("Content-Type", "application/json")
+        .set("Accept", "application/json")
+        .expect(204, done);
+    });
+
+    it("Delete forever responds with status 204", (done) => {
+      factory.app
+        .delete("/api/user/2/forever")
+        .set("Authorization", `Bearer ${auth.accessToken}`)
+        .set("Content-Type", "application/json")
+        .set("Accept", "application/json")
+        .expect(204, done);
     });
   });
 });
