@@ -32,14 +32,14 @@ const builderConnection = () => {
     logging: false,
     entities: [`${prod ? "build" : "src"}/models/**/*.${prod ? "js" : "ts"}`],
     migrations: [
-      `${prod ? "build" : "src"}/migration/**/*.${prod ? "js" : "ts"}`,
+      `${prod ? "build" : "src"}/migrations/**/*.${prod ? "js" : "ts"}`,
     ],
     subscribers: [
       `${prod ? "build" : "src"}/subscriber/**/*.${prod ? "js" : "ts"}`,
     ],
     cli: {
       entitiesDir: "src/models",
-      migrationsDir: "src/migration",
+      migrationsDir: "src/migrations",
       subscribersDir: "src/subscriber",
     },
   };

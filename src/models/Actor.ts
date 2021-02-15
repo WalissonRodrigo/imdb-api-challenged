@@ -9,17 +9,10 @@ import {
 import { Length, IsNotEmpty, MinLength } from "class-validator";
 import { Movie } from "./Movie";
 
-const GENDER = {
-  FEMALE: 1,
-  MALE: 2,
-  OTHER: 3,
-};
-
 const actorsList = [
   {
     id: 1,
     name: "Robert De Niro",
-    gender: GENDER.MALE,
     bio: `One of the greatest actors of all time, Robert De Niro was born on August 17, 1943 in Manhattan,
        New York City, to artists Virginia (Admiral) and Robert De Niro Sr. His paternal grandfather was of Italian descent,
         and his other ancestry is Irish, English, Dutch, German, and French.`,
@@ -33,7 +26,6 @@ const actorsList = [
   {
     id: 2,
     name: "Jack Nicholson",
-    gender: GENDER.MALE,
     bio: `Jack Nicholson, an American actor, producer, director and screenwriter, is a three-time
      Academy Award winner and twelve-time nominee. Nicholson is also notable for 
      being one of two actors - the other being Michael Caine - who have received an Oscar nomination 
@@ -48,7 +40,6 @@ const actorsList = [
   {
     id: 3,
     name: "Halle Berry",
-    gender: GENDER.MALE,
     bio: `Halle Maria Berry was born Maria Halle Berry on August 14, 1966 in Cleveland, 
     Ohio & raised in Bedford, Ohio. Halle was born to Judith Ann Hawkins, 
     a psychiatric nurse & Jerome Jesse Berry, a hospital attendant. 
@@ -81,10 +72,10 @@ const actorsList = [
 @Entity()
 export class Actor {
   static mockTestCompany(): Actor {
-    const company: Actor = <Actor>(
+    const actor: Actor = <Actor>(
       actorsList[Math.floor(Math.random() * actorsList.length - 1)]
     );
-    return company;
+    return actor;
   }
   @PrimaryGeneratedColumn()
   id: number;
@@ -95,12 +86,8 @@ export class Actor {
   @Length(3, 55)
   name: string;
 
-  @Column()
-  @IsNotEmpty()
+  @Column({nullable: true})
   bio: string;
-
-  @Column({ enum: GENDER })
-  gender: number;
 
   @ManyToMany(() => Movie, (movie) => movie.actors)
   movies: Movie[];

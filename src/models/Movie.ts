@@ -8,7 +8,7 @@ import {
   ManyToMany,
   JoinTable,
 } from "typeorm";
-import { Length, IsNotEmpty, MinLength } from "class-validator";
+import { IsNotEmpty, MinLength } from "class-validator";
 import { Company } from "./Company";
 import moment from "moment";
 import { Genre } from "./Genre";
@@ -42,45 +42,44 @@ export class Movie {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ length: 255 })
   @IsNotEmpty()
   @MinLength(3)
-  @Length(3, 60)
   title: string;
 
-  @Column()
+  @Column({ length: 255 })
   @IsNotEmpty()
   originalTitle: string;
 
-  @Column()
+  @Column({ length: 620 })
   @IsNotEmpty()
   overview: string;
 
-  @Column()
+  @Column({ length: 400 })
   tagline: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   posterPath: string;
 
   @Column({ default: statusList[0] })
   status: string;
 
-  @Column({ default: 0 })
+  @Column({ default: 0.0, type: "float" })
   budget: number;
 
-  @Column({ default: 0 })
+  @Column({ default: 0.0, type: "float" })
   popularity: number;
 
-  @Column({ default: 0 })
+  @Column({ default: 0.0, type: "float" })
   revenue: number;
 
-  @Column({ default: 0 })
+  @Column({ default: 0.0, type: "float" })
   voteAverage: number;
 
   @Column({ default: 0 })
   voteCount: number;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   releaseDate: Date;
 
   @ManyToMany(() => Company, (company) => company.movies)

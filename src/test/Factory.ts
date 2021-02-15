@@ -75,6 +75,7 @@ export class TestFactory {
    */
   private async startup(): Promise<void> {
     this._connection = await createConnection(this.options);
+    await this._connection.runMigrations();
     this._app = new Server().app;
     this._server = createServer(this._app).listen(process.env.PORT);
   }
