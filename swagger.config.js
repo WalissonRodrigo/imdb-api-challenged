@@ -35,5 +35,5 @@ module.exports.swaggerDocument = {
 };
 
 module.exports.swaggerOptions = {
-  explorer: true,
+  explorer: false,
 };
