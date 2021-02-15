@@ -1,12 +1,63 @@
 import { Request, Response } from "express";
-import { getRepository } from "typeorm";
+import { getRepository, Like } from "typeorm";
 import { validate } from "class-validator";
 
 import { Movie } from "../models/Movie";
 
 /**
  * @swagger
+ *
  *  components:
+ *    parameters:
+ *      PageFrom:
+ *        in: query
+ *        name: from
+ *        description: Number of the page you are on
+ *        required: false
+ *        schema:
+ *          type: number
+ *      PageTo:
+ *        in: query
+ *        name: to
+ *        description: Total records per requisition
+ *        required: false
+ *        schema:
+ *          type: number
+ *      PagePerPage:
+ *        in: query
+ *        name: per_page
+ *        description: Sets the limit of records per page
+ *        required: false
+ *        schema:
+ *          type: string
+ *      PageTotal:
+ *        in: query
+ *        name: total
+ *        description: Maximum total pages available using seeking current record quantity
+ *        required: false
+ *        schema:
+ *          type: number
+ *      PageCurrent:
+ *        in: query
+ *        name: current_page
+ *        description: Current page within the navigation of available pages.
+ *        required: false
+ *        schema:
+ *          type: number
+ *      PagePrevius:
+ *        in: query
+ *        name: prev_page
+ *        description: Previous page within the navigation of available pages.
+ *        required: false
+ *        schema:
+ *          type: number
+ *      PageNext:
+ *        in: query
+ *        name: next_page
+ *        description: Next page within the navigation of available pages.
+ *        required: false
+ *        schema:
+ *          type: number
  *    schemas:
  *      Movie:
  *        type: object
@@ -103,6 +154,20 @@ class MovieController {
    *          - Movie
    *        content:
    *          - application/json
+   *        parameters:
+   *          - in: query
+   *            name: title
+   *            schema:
+   *              type: string
+   *            required: false
+   *            description: Search using title of movie or original title
+   *          - $ref: "#/components/parameters/PageFrom"
+   *          - $ref: "#/components/parameters/PageTo"
+   *          - $ref: "#/components/parameters/PagePerPage"
+   *          - $ref: "#/components/parameters/PageTotal"
+   *          - $ref: "#/components/parameters/PageCurrent"
+   *          - $ref: "#/components/parameters/PagePrevius"
+   *          - $ref: "#/components/parameters/PageNext"
    *        responses:
    *          200:
    *            description: Array with all movies not deleted. Authentication is needed to get this content.
@@ -126,10 +191,19 @@ class MovieController {
   ): Promise<Response | any> => {
     // Get movies from database
     const perPage = Number(req.query.per_page || 25);
+    const filterTitle = req.query.title || null;
     const movieRepository = getRepository(Movie);
     // Never send the passwords on response
+    let where: any;
+    if (filterTitle) {
+      where = [
+        { title: Like(`%${filterTitle}%`) },
+        { originalTitle: Like(`%${filterTitle}%`) },
+      ];
+    }
     const movies = await movieRepository
-      .createQueryBuilder("user")
+      .createQueryBuilder()
+      .where(where)
       .paginate(perPage);
     // Send the movies object
     res.status(200).json(movies);
@@ -530,6 +604,8 @@ class MovieController {
    *        responses:
    *          201:
    *            description: Movie rated with success
+   *          400:
+   *            description: Rate is not within the acceptable range! Use from 0 to 4
    *          401:
    *            description: Unauthenticated
    *          403:
@@ -542,6 +618,12 @@ class MovieController {
   static rate = async (req: Request, res: Response): Promise<Response> => {
     // Get the ID and Rate from the url
     const { id, rate } = req.body;
+    if ((rate && rate < 0) || Number(rate) > 4) {
+      res
+        .status(400)
+        .send("Rate is not within the acceptable range! Use from 0 to 4");
+      return;
+    }
     let movie: Movie;
     const movieRepository = getRepository(Movie);
     try {
@@ -553,7 +635,8 @@ class MovieController {
     try {
       // caculating new average using reverse calc
       movie.voteAverage =
-        (movie.voteCount * movie.voteAverage + rate) / movie.voteCount++;
+        (movie.voteCount * movie.voteAverage + Number(rate)) /
+        (movie.voteCount + 1);
       movie.voteCount += 1;
       await movieRepository.save(movie);
     } catch (error) {

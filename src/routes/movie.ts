@@ -55,7 +55,7 @@ router.post(
 
 // Rate on movie
 router.post(
-  "rate",
+  "/rate",
   [checkJwt, checkRole(["ADMIN", "USER"])],
   MovieController.rate
 );
