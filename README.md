@@ -83,7 +83,14 @@ Siga as etapas para executar o projeto:
 1. Execute no seu terminal o comando `npm i`
 2. Altere o nome do arquivo `.env.example` para `.env`
 3. Realize a configuração do seu banco de dados no arquivo`.env`
-4. Execute o comando `npm dev` para iniciar seu projeto local.
+4. Execute o comando `npm run dev` para iniciar seu projeto local.
 5. Execute o comando `npm run migration:run`. 
-6. Opicional: Abra o arquivo `src/migration/1612924013545-CreateAdminUser.ts` e altere o email e senha de acordo com sua necessidade antes da etapa anterior.
-7. Acesse no seu servidor local a rota (http://localhost:3000/api-docs|`/api-docs`) para testar a api usando o swagger.
+6. Opicional: Abra o arquivo `src/migrations/Users.seed.ts` e altere o email e senha de acordo com sua necessidade antes da etapa anterior.
+7. Acesse no seu servidor local a rota http://localhost:3000/api-docs `/api-docs` para testar a api usando o swagger.
+
+
+# Quer testar a API sem instalar? Use o link abaixo
+
+Versão de produção com dados disponíveis para testes.
+
+https://imdbteste.herokuapp.com/api-docs/
