@@ -3,7 +3,7 @@ import { getRepository, MigrationInterface, QueryRunner } from "typeorm";
 import { Genre } from "../models/Genre";
 import genres from "./Genres.seed";
 
-export class CreateGenres1613350085204 implements MigrationInterface {
+export class CreateGenres1613330085204 implements MigrationInterface {
   public async up(_queryRunner: QueryRunner): Promise<void> {
     try {
       const genreRepository = getRepository(Genre);

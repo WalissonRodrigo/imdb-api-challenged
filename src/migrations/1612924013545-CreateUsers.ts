@@ -13,6 +13,7 @@ export class CreateAdminUser1612924013545 implements MigrationInterface {
         Object.keys(item).forEach((key) => {
           user[key] = item[key];
         });
+        user.hashPassword();
         listUser.push(user);
       });
       const userRepository = getRepository(User);

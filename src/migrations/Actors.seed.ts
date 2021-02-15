@@ -7,9 +7,10 @@ const actors: Actor[] = <Actor[]>[
     name: "Monica Bellucci",
     movies: <Movie[]>(<unknown>[
       {
-        id: 206647,
+        id: 21,
         title: "Spectre",
         originalTitle: "Spectre",
+        tagline: "Generic tagline Spectre",
         overview:
           "A cryptic message from Bond’s past sends him on a trail to uncover a sinister organization. While M battles political forces to keep the secret service alive, Bond peels back the layers of deceit to reveal the terrible truth behind SPECTRE.",
         posterPath: "/hE24GYddaxB9MVZl1CaiI86M3kp.jpg",
@@ -18,11 +19,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 7.090211,
         popularity: 7.090211,
         releaseDate: "2015-10-26",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
-        id: 604,
+        id: 22,
         title: "The Matrix Reloaded",
         originalTitle: "The Matrix Reloaded",
+        tagline: "Generic tagline The Matrix Reloaded",
         overview:
           "Six months after the events depicted in The Matrix, Neo has proved to be a good omen for the free humans, as more and more humans are being freed from the matrix and brought to Zion, the one and only stronghold of the Resistance. Neo himself has discovered his superpowers including super speed, ability to see the codes of the things inside the matrix and a certain degree of pre-cognition. But a nasty piece of news hits the human resistance: 250,000 machine sentinels are digging to Zion and would reach them in 72 hours. As Zion prepares for the ultimate war, Neo, Morpheus and Trinity are advised by the Oracle to find the Keymaker who would help them reach the Source. Meanwhile Neo's recurrent dreams depicting Trinity's death have got him worried and as if it was not enough, Agent Smith has somehow escaped deletion, has become more powerful than before and has fixed Neo as his next target.",
         posterPath: "/ezIurBz2fdUc68d98Fp9dRf5ihv.jpg",
@@ -31,11 +36,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 3.41123,
         popularity: 3.41123,
         releaseDate: "2003-05-15",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
-        id: 605,
+        id: 23,
         title: "The Matrix Revolutions",
         originalTitle: "The Matrix Revolutions",
+        tagline: "Generic tagline The Matrix Revolutions",
         overview:
           "The human city of Zion defends itself against the massive invasion of the machines as Neo fights to end the war at another front while also opposing the rogue Agent Smith.",
         posterPath: "/sKogjhfs5q3azmpW7DFKKAeLEG8.jpg",
@@ -44,6 +53,9 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 3.043018,
         popularity: 3.043018,
         releaseDate: "2003-11-05",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
     ]),
   },
@@ -52,9 +64,10 @@ const actors: Actor[] = <Actor[]>[
     name: "Shu Qi",
     movies: <Movie[]>(<unknown>[
       {
-        id: 4108,
+        id: 24,
         title: "The Transporter",
         originalTitle: "The Transporter",
+        tagline: "Generic tagline The Transporter",
         overview:
           "Former Special Forces officer Frank Martin will deliver anything to anyone for the right price, and his no-questions-asked policy puts him in high demand. But when he realizes his latest cargo is alive, it sets in motion a dangerous chain of events. The bound and gagged Lai is being smuggled to France by a shady American businessman, and Frank works to save her as his own illegal activities are uncovered by a French detective.",
         posterPath: "/vD5plFV1ec9CSIsdlPe9icCDRTL.jpg",
@@ -63,11 +76,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 2.99031,
         popularity: 2.99031,
         releaseDate: "2002-10-02",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
-        id: 98567,
+        id: 25,
         title: "Chinese Zodiac",
         originalTitle: "Chinese Zodiac",
+        tagline: "Generic tagline Chinese Zodiac",
         overview:
           "Asian Hawk (Jackie Chan) leads a mercenary team to recover several lost artifacts from the Old Summer Palace, the bronze heads of the 12 Chinese Zodiac animals which were sacked by the French and British armies from the imperial Summer Palace in Beijing in 1860. Assisted by a Chinese student and a Parisian lady, Hawk stops at nothing to accomplish the mission.",
         posterPath: "/tCUEJ6Svr9eqcUOpxlRbFKlEVqm.jpg",
@@ -76,11 +93,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 2.325203,
         popularity: 2.325203,
         releaseDate: "2012-12-20",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
-        id: 12572,
+        id: 26,
         title: "New York, I Love You",
         originalTitle: "New York, I Love You",
+        tagline: "Generic tagline New York, I Love You",
         overview:
           "Ten vignettes in New York City: a pickpocket meets his match; a young Hasidic woman, on the eve of her marriage, reveals herself to an Indian businessman; a writer tries a pick-up line; an artist seeks a model; a composer needs to read; two women connect; a man takes a child to Central Park; lovers meet; a couple takes a walk on their anniversary; a kid goes to the prom with a girl in a wheelchair; a retired singer contemplates suicide. There are eight million stories in the naked city: these have been ten of them.",
         posterPath: "/roKhZLvRRzqdVY9rvDv1i5ZAmmx.jpg",
@@ -89,6 +110,9 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 1.989928,
         popularity: 1.989928,
         releaseDate: "2008-09-01",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
     ]),
   },
@@ -97,9 +121,10 @@ const actors: Actor[] = <Actor[]>[
     name: "Margot Robbie",
     movies: <Movie[]>(<unknown>[
       {
-        id: 106646,
+        id: 27,
         title: "The Wolf of Wall Street",
         originalTitle: "The Wolf of Wall Street",
+        tagline: "Generic tagline The Wolf of Wall Street",
         overview:
           "A New York stockbroker refuses to cooperate in a large securities fraud case involving corruption on Wall Street, corporate banking world and mob infiltration. Based on Jordan Belfort's autobiography.",
         posterPath: "/vK1o5rZGqxyovfIhZyMELhk03wO.jpg",
@@ -108,11 +133,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 6.013736,
         popularity: 6.013736,
         releaseDate: "2013-12-25",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
-        id: 256591,
+        id: 28,
         title: "Focus",
         originalTitle: "Focus",
+        tagline: "Generic tagline Focus",
         overview:
           "A veteran grifter takes a young, attractive woman under his wing, but things get complicated when they become romantically involved.",
         posterPath: "/9IElGiLkxPLUWZ3avy31bNSG3Tq.jpg",
@@ -121,11 +150,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 3.90442,
         popularity: 3.90442,
         releaseDate: "2015-02-25",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
-        id: 297761,
+        id: 29,
         title: "Suicide Squad",
         originalTitle: "Suicide Squad",
+        tagline: "Generic tagline Suicide Squad",
         overview:
           "From DC Comics comes the Suicide Squad, an antihero team of incarcerated supervillains who act as deniable assets for the United States government, undertaking high-risk black ops missions in exchange for commuted prison sentences.",
         posterPath: "/e1mjopzAS2KNsvpbpahQ1a6SkSn.jpg",
@@ -134,6 +167,9 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 48.261451,
         popularity: 48.261451,
         releaseDate: "2016-08-03",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
     ]),
   },
@@ -142,9 +178,10 @@ const actors: Actor[] = <Actor[]>[
     name: "Paul Walker",
     movies: <Movie[]>(<unknown>[
       {
-        id: 82992,
+        id: 30,
         title: "Fast & Furious 6",
         originalTitle: "Fast & Furious 6",
+        tagline: "Generic tagline Fast & Furious 6",
         overview:
           "Hobbs has Dominic and Brian reassemble their crew to take down a team of mercenaries: Dominic unexpectedly gets convoluted also facing his presumed deceased girlfriend, Letty.",
         posterPath: "/b9gTJKLdSbwcQRKzmqMq3dMfRwI.jpg",
@@ -153,11 +190,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 1.737593,
         popularity: 1.737593,
         releaseDate: "2013-05-06",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
-        id: 168259,
+        id: 31,
         title: "Furious 7",
         originalTitle: "Furious 7",
+        tagline: "Generic tagline Furious 7",
         overview:
           "Deckard Shaw seeks revenge against Dominic Toretto and his family for his comatose brother.",
         posterPath: "/dCgm7efXDmiABSdWDHBDBx2jwmn.jpg",
@@ -166,11 +207,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 13.659073,
         popularity: 13.659073,
         releaseDate: "2015-04-01",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
-        id: 9799,
+        id: 32,
         title: "The Fast and the Furious",
         originalTitle: "The Fast and the Furious",
+        tagline: "Generic tagline The Fast and the Furious",
         overview:
           "Domenic Toretto is a Los Angeles street racer suspected of masterminding a series of big-rig hijackings. When undercover cop Brian O'Conner infiltrates Toretto's iconoclastic crew, he falls for Toretto's sister and must choose a side: the gang or the LAPD.",
         posterPath: "/x4So4OkqnjfOSBCCNd5uosMmQiB.jpg",
@@ -179,6 +224,9 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 1.651117,
         popularity: 1.651117,
         releaseDate: "2001-06-18",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
     ]),
   },
@@ -187,9 +235,10 @@ const actors: Actor[] = <Actor[]>[
     name: "Emilia Clarke",
     movies: <Movie[]>(<unknown>[
       {
-        id: 87101,
+        id: 33,
         title: "Terminator Genisys",
         originalTitle: "Terminator Genisys",
+        tagline: "Generic tagline Terminator Genisys",
         overview:
           "The year is 2029. John Connor, leader of the resistance continues the war against the machines. At the Los Angeles offensive, John's fears of the unknown future begin to emerge when TECOM spies reveal a new plot by SkyNet that will attack him from both fronts; past and future, and will ultimately change warfare forever.",
         posterPath: "/5JU9ytZJyR3zmClGmVm9q4Geqbd.jpg",
@@ -198,21 +247,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 13.438976,
         popularity: 13.438976,
         releaseDate: "2015-06-23",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
-        id: 1399,
-        overview:
-          "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.",
-        posterPath: "/jIhL6mlT7AblhbHJgEoiBIOUVl1.jpg",
-        genres: [10765, 10759, 18],
-        voteCount: 1172,
-        voteAverage: 29.780826,
-        popularity: 29.780826,
-      },
-      {
-        id: 296096,
+        id: 34,
         title: "Me Before You",
         originalTitle: "Me Before You",
+        tagline: "Generic tagline Me Before You",
         overview:
           "A small town girl is caught between dead-end jobs. A high-profile, successful man becomes wheelchair bound following an accident. The man decides his life is not worth living until the girl is hired for six months to be his new caretaker. Worlds apart and trapped together by circumstance, the two get off to a rocky start. But the girl becomes determined to prove to the man that life is worth living and as they embark on a series of adventures together, each finds their world changing in ways neither of them could begin to imagine.",
         posterPath: "/kJ6eMKlY1I8vVUosWtfP7qbCugL.jpg",
@@ -221,6 +264,9 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 8.553487,
         popularity: 8.553487,
         releaseDate: "2016-03-03",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
     ]),
   },
@@ -229,9 +275,10 @@ const actors: Actor[] = <Actor[]>[
     name: "Alexandra Daddario",
     movies: <Movie[]>(<unknown>[
       {
-        id: 254128,
+        id: 35,
         title: "San Andreas",
         originalTitle: "San Andreas",
+        tagline: "Generic tagline San Andreas",
         overview:
           "In the aftermath of a massive earthquake in California, a rescue-chopper pilot makes a dangerous journey across the state in order to rescue his estranged daughter.",
         posterPath: "/qey0tdcOp9kCDdEZuJ87yE3crSe.jpg",
@@ -240,11 +287,16 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 6.990629,
         popularity: 6.990629,
         releaseDate: "2015-05-27",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
-        id: 32657,
+        id: 36,
         title: "Percy Jackson & the Olympians: The Lightning Thief",
         originalTitle: "Percy Jackson & the Olympians: The Lightning Thief",
+        tagline:
+          "Generic tagline Percy Jackson & the Olympians: The Lightning Thief",
         overview:
           "Accident prone teenager, Percy discovers he's actually a demi-God, the son of Poseidon, and he is needed when Zeus' lightning is stolen. Percy must master his new found skills in order to prevent a war between the Gods that could devastate the entire world.",
         posterPath: "/5NhyXkodMzDRW8uqtPqlxJsoBhf.jpg",
@@ -253,11 +305,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 3.835911,
         popularity: 3.835911,
         releaseDate: "2010-02-01",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
-      {
+      /* {
         id: 76285,
         title: "Percy Jackson: Sea of Monsters",
         originalTitle: "Percy Jackson: Sea of Monsters",
+        tagline: "Generic tagline Percy Jackson: Sea of Monsters",
         overview:
           "In their quest to confront the ultimate evil, Percy and his friends battle swarms of mythical creatures to find the mythical Golden Fleece and to stop an ancient evil from rising.",
         posterPath: "/k1bhUW7XM5X0yD3iewAEvloFBEo.jpg",
@@ -266,7 +322,10 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 2.444386,
         popularity: 2.444386,
         releaseDate: "2013-08-07",
-      },
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
+      }, */
     ]),
   },
   {
@@ -274,9 +333,10 @@ const actors: Actor[] = <Actor[]>[
     name: "Jason Statham",
     movies: <Movie[]>(<unknown>[
       {
-        id: 82992,
+        id: 30,
         title: "Fast & Furious 6",
         originalTitle: "Fast & Furious 6",
+        tagline: "Generic tagline Fast & Furious 6",
         overview:
           "Hobbs has Dominic and Brian reassemble their crew to take down a team of mercenaries: Dominic unexpectedly gets convoluted also facing his presumed deceased girlfriend, Letty.",
         posterPath: "/b9gTJKLdSbwcQRKzmqMq3dMfRwI.jpg",
@@ -285,11 +345,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 1.737593,
         popularity: 1.737593,
         releaseDate: "2013-05-06",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
-        id: 168259,
+        id: 31,
         title: "Furious 7",
         originalTitle: "Furious 7",
+        tagline: "Generic tagline Furious 7",
         overview:
           "Deckard Shaw seeks revenge against Dominic Toretto and his family for his comatose brother.",
         posterPath: "/dCgm7efXDmiABSdWDHBDBx2jwmn.jpg",
@@ -298,11 +362,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 13.659073,
         popularity: 13.659073,
         releaseDate: "2015-04-01",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
-      {
+      /*  {
         id: 76163,
         title: "The Expendables 2",
         originalTitle: "The Expendables 2",
+        tagline: "Generic tagline The Expendables 2",
         overview:
           "Mr. Church reunites the Expendables for what should be an easy paycheck, but when one of their men is murdered on the job, their quest for revenge puts them deep in enemy territory and up against an unexpected threat.",
         posterPath: "/dJPnTe1qOcO7XqsJvESFph83m6m.jpg",
@@ -311,17 +379,21 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 3.511878,
         popularity: 3.511878,
         releaseDate: "2012-08-08",
-      },
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
+      }, */
     ]),
   },
   {
     id: 2888,
     name: "Will Smith",
     movies: <Movie[]>(<unknown>[
-      {
+      /*       {
         id: 41154,
         title: "Men in Black 3",
         originalTitle: "Men in Black 3",
+        tagline: "Generic tagline Men in Black 3",
         overview:
           "Agents J (Will Smith) and K (Tommy Lee Jones) are back...in time. J has seen some inexplicable things in his 15 years with the Men in Black, but nothing, not even aliens, perplexes him as much as his wry, reticent partner. But when K's life and the fate of the planet are put at stake, Agent J will have to travel back in time to put things right. J discovers that there are secrets to the universe that K never told him - secrets that will reveal themselves as he teams up with the young Agent K (Josh Brolin) to save his partner, the agency, and the future of humankind.",
         posterPath: "/l9hrvXyGq19f6jPRZhSVRibTMwW.jpg",
@@ -330,11 +402,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 3.121988,
         popularity: 3.121988,
         releaseDate: "2012-05-23",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 6479,
         title: "I Am Legend",
         originalTitle: "I Am Legend",
+        tagline: "Generic tagline I Am Legend",
         overview:
           "Robert Neville is a scientist who was unable to stop the spread of the terrible virus that was incurable and man-made. Immune, Neville is now the last human survivor in what is left of New York City and perhaps the world. For three years, Neville has faithfully sent out daily radio messages, desperate to find any other survivors who might be out there. But he is not alone.",
         posterPath: "/pfvQ3kkSbFsIPC5exKPUf5nOf60.jpg",
@@ -343,11 +419,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 2.867238,
         popularity: 2.867238,
         releaseDate: "2007-12-14",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 607,
         title: "Men in Black",
         originalTitle: "Men in Black",
+        tagline: "Generic tagline Men in Black",
         overview:
           "Men in Black follows the exploits of agents Kay and Jay, members of a top-secret organization established to monitor and police alien activity on Earth. The two Men in Black find themselves in the middle of the deadly plot by an intergalactic terrorist who has arrived on Earth to assassinate two ambassadors from opposing galaxies. In order to prevent worlds from colliding, the MiB must track down the terrorist and prevent the destruction of Earth. It's just another typical day for the Men in Black.",
         posterPath: "/f24UVKq3UiQWLqGWdqjwkzgB8j8.jpg",
@@ -356,17 +436,22 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 5.062027,
         popularity: 5.062027,
         releaseDate: "1997-07-01",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
+ */
     ]),
   },
   {
     id: 1245,
     name: "Scarlett Johansson",
     movies: <Movie[]>(<unknown>[
-      {
+      /*       {
         id: 24428,
         title: "The Avengers",
         originalTitle: "The Avengers",
+        tagline: "Generic tagline The Avengers",
         overview:
           "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!",
         posterPath: "/cezWGskPY5x7GaglTTRN4Fugfb8.jpg",
@@ -375,11 +460,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 7.353212,
         popularity: 7.353212,
         releaseDate: "2012-04-25",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 10138,
         title: "Iron Man 2",
         originalTitle: "Iron Man 2",
+        tagline: "Generic tagline Iron Man 2",
         overview:
           'With the world now aware of his dual life as the armored superhero Iron Man, billionaire inventor Tony Stark faces pressure from the government, the press, and the public to share his technology with the military. Unwilling to let go of his invention, Stark, along with Pepper Potts, and James "Rhodey" Rhodes at his side, must forge new alliances - and confront powerful enemies.',
         posterPath: "/ArqpkNYGfcTIA6umWt6xihfIZZv.jpg",
@@ -388,11 +477,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 4.559376,
         popularity: 4.559376,
         releaseDate: "2010-04-28",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 99861,
         title: "Avengers: Age of Ultron",
         originalTitle: "Avengers: Age of Ultron",
+        tagline: "Generic tagline Avengers: Age of Ultron",
         overview:
           "When Tony Stark tries to jumpstart a dormant peacekeeping program, things go awry and Earth’s Mightiest Heroes are put to the ultimate test as the fate of the planet hangs in the balance. As the villainous Ultron emerges, it is up to The Avengers to stop him from enacting his terrible plans, and soon uneasy alliances and unexpected action pave the way for an epic and unique global adventure.",
         posterPath: "/t90Y3G8UGQp0f0DrP60wRu9gfrH.jpg",
@@ -401,17 +494,22 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 7.557812,
         popularity: 7.557812,
         releaseDate: "2015-04-22",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
+ */
     ]),
   },
   {
     id: 192,
     name: "Morgan Freeman",
     movies: <Movie[]>(<unknown>[
-      {
+      /* {
         id: 155,
         title: "The Dark Knight",
         originalTitle: "The Dark Knight",
+        tagline: "Generic tagline The Dark Knight",
         overview:
           "Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective, but they soon find themselves prey to a reign of chaos unleashed by a rising criminal mastermind known to the terrified citizens of Gotham as the Joker.",
         posterPath: "/1hRoyzDtpgMU7Dz4JF22RANzQO7.jpg",
@@ -420,11 +518,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 8.090715,
         popularity: 8.090715,
         releaseDate: "2008-07-16",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 49026,
         title: "The Dark Knight Rises",
         originalTitle: "The Dark Knight Rises",
+        tagline: "Generic tagline The Dark Knight Rises",
         overview:
           "Following the death of District Attorney Harvey Dent, Batman assumes responsibility for Dent's crimes to protect the late attorney's reputation and is subsequently hunted by the Gotham City Police Department. Eight years later, Batman encounters the mysterious Selina Kyle and the villainous Bane, a new terrorist leader who overwhelms Gotham's finest. The Dark Knight resurfaces to protect a city that has branded him an enemy.",
         posterPath: "/dEYnvnUfXrqvqeRSqvIEtmzhoA8.jpg",
@@ -433,11 +535,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 6.836486,
         popularity: 6.836486,
         releaseDate: "2012-07-16",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 278,
         title: "The Shawshank Redemption",
         originalTitle: "The Shawshank Redemption",
+        tagline: "Generic tagline The Shawshank Redemption",
         overview:
           "Framed in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.",
         genres: [18, 80],
@@ -445,17 +551,21 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 6.741296,
         popularity: 6.741296,
         releaseDate: "1994-09-10",
-      },
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
+      }, */
     ]),
   },
   {
     id: 9827,
     name: "Rose Byrne",
     movies: <Movie[]>(<unknown>[
-      {
+      /* {
         id: 49538,
         title: "X-Men: First Class",
         originalTitle: "X-Men: First Class",
+        tagline: "Generic tagline X-Men: First Class",
         overview:
           "Before Charles Xavier and Erik Lensherr took the names Professor X and Magneto, they were two young men discovering their powers for the first time. Before they were arch-enemies, they were closest of friends, working together with other mutants (some familiar, some new), to stop the greatest threat the world has ever known.",
         genres: [28, 878, 12],
@@ -463,11 +573,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 1.129395,
         popularity: 1.129395,
         releaseDate: "2011-05-24",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 1894,
         title: "Star Wars: Episode II - Attack of the Clones",
         originalTitle: "Star Wars: Episode II - Attack of the Clones",
+        tagline: "Generic tagline Star Wars: Episode II - Attack of the Clones",
         overview:
           "Ten years after the invasion of Naboo, the galaxy is on the brink of civil war. Under the leadership of a renegade Jedi named Count Dooku, thousands of solar systems threaten to break away from the Galactic Republic. When an assassination attempt is made on Senator Padmé Amidala, the former Queen of Naboo, twenty-year-old Jedi apprentice Anakin Skywalker is assigned to protect her. In the course of his mission, Anakin discovers his love for Padmé as well as his own darker side. Soon, Anakin, Padmé, and Obi-Wan Kenobi are drawn into the heart of the Separatist movement and the beginning of the Clone Wars.",
         genres: [12, 28, 878],
@@ -475,11 +589,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 2.824467,
         popularity: 2.824467,
         releaseDate: "2002-05-15",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 238713,
         title: "Spy",
         originalTitle: "Spy",
+        tagline: "Generic tagline Spy",
         overview:
           "A desk-bound CIA analyst volunteers to go undercover to infiltrate the world of a deadly arms dealer, and prevent diabolical global disaster.",
         posterPath: "/49Akyhe0gnuokaDIKKDldFRBoru.jpg",
@@ -488,17 +606,21 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 3.645483,
         popularity: 3.645483,
         releaseDate: "2015-05-06",
-      },
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
+      }, */
     ]),
   },
   {
     id: 10990,
     name: "Emma Watson",
     movies: <Movie[]>(<unknown>[
-      {
+      /* {
         id: 671,
         title: "Harry Potter and the Philosopher's Stone",
         originalTitle: "Harry Potter and the Philosopher's Stone",
+        tagline: "Generic tagline Harry Potter and the Philosopher's Stone",
         overview:
           "Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard -- with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry. As he learns to harness his newfound powers with the help of the school's kindly headmaster, Harry uncovers the truth about his parents' deaths -- and about the villain who's to blame.",
         posterPath: "/lR4drT4VGfts32j9jYTZUc1a3Pa.jpg",
@@ -507,11 +629,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 6.742273,
         popularity: 6.742273,
         releaseDate: "2001-11-16",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 12445,
         title: "Harry Potter and the Deathly Hallows: Part 2",
         originalTitle: "Harry Potter and the Deathly Hallows: Part 2",
+        tagline: "Generic tagline Harry Potter and the Deathly Hallows: Part 2",
         overview:
           "In the second installment of the two-part conclusion, Harry and his best friends, Ron and Hermione, continue their quest to vanquish the evil Voldemort once and for all. Just as things begin to look hopeless for the young wizards, Harry discovers a trio of magical objects that endow him with powers to rival Voldemort's formidable skills.",
         posterPath: "/fTplI1NCSuEDP4ITLcTps739fcC.jpg",
@@ -520,11 +646,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 5.77306,
         popularity: 5.77306,
         releaseDate: "2011-07-07",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 12444,
         title: "Harry Potter and the Deathly Hallows: Part 1",
         originalTitle: "Harry Potter and the Deathly Hallows: Part 1",
+        tagline: "Generic tagline Harry Potter and the Deathly Hallows: Part 1",
         overview:
           "The end begins as Harry, Ron, and Hermione walk away from their last year at Hogwarts to find and destroy the remaining Horcruxes, putting an end to Voldemort's bid for immortality. But with Harry's beloved Dumbledore dead and Voldemort's unscrupulous Death Eaters on the loose, the world is more dangerous than ever.",
         posterPath: "/maP4MTfPCeVD2FZbKTLUgriOW4R.jpg",
@@ -533,17 +663,21 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 4.326054,
         popularity: 4.326054,
         releaseDate: "2010-10-17",
-      },
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
+      }, */
     ]),
   },
   {
     id: 74568,
     name: "Chris Hemsworth",
     movies: <Movie[]>(<unknown>[
-      {
+      /* {
         id: 24428,
         title: "The Avengers",
         originalTitle: "The Avengers",
+        tagline: "Generic tagline The Avengers",
         overview:
           "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!",
         posterPath: "/cezWGskPY5x7GaglTTRN4Fugfb8.jpg",
@@ -552,11 +686,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 7.353212,
         popularity: 7.353212,
         releaseDate: "2012-04-25",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 10195,
         title: "Thor",
         originalTitle: "Thor",
+        tagline: "Generic tagline Thor",
         overview:
           "Against his father Odin's will, The Mighty Thor -a powerful but arrogant warrior god -recklessly reignites an ancient war. Thor is cast down to Earth and forced to live among humans as punishment. Once here, Thor learns what it takes to be a true hero when the most dangerous villain of his world sends the darkest forces of Asgard to invade Earth.",
         posterPath: "/bIuOWTtyFPjsFDevqvF3QrD1aun.jpg",
@@ -565,11 +703,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 5.293285,
         popularity: 5.293285,
         releaseDate: "2011-04-21",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 99861,
         title: "Avengers: Age of Ultron",
         originalTitle: "Avengers: Age of Ultron",
+        tagline: "Generic tagline Avengers: Age of Ultron",
         overview:
           "When Tony Stark tries to jumpstart a dormant peacekeeping program, things go awry and Earth’s Mightiest Heroes are put to the ultimate test as the fate of the planet hangs in the balance. As the villainous Ultron emerges, it is up to The Avengers to stop him from enacting his terrible plans, and soon uneasy alliances and unexpected action pave the way for an epic and unique global adventure.",
         posterPath: "/t90Y3G8UGQp0f0DrP60wRu9gfrH.jpg",
@@ -578,17 +720,21 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 7.557812,
         popularity: 7.557812,
         releaseDate: "2015-04-22",
-      },
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
+      }, */
     ]),
   },
   {
     id: 8784,
     name: "Daniel Craig",
     movies: <Movie[]>(<unknown>[
-      {
+      /* {
         id: 37724,
         title: "Skyfall",
         originalTitle: "Skyfall",
+        tagline: "Generic tagline Skyfall",
         overview:
           "When Bond's latest assignment goes gravely wrong and agents around the world are exposed, MI6 is attacked forcing M to relocate the agency. These events cause her authority and position to be challenged by Gareth Mallory (Ralph Fiennes), the new Chairman of the Intelligence and Security Committee. With MI6 now compromised from both inside and out, M is left with one ally she can trust: Bond. 007 takes to the shadows - aided only by field agent, Eve (Naomie Harris) - following a trail to the mysterious Silva (Javier Bardem), whose lethal and hidden motives have yet to reveal themselves.",
         posterPath: "/lQCkPLDxFONmgzrWLvq085v1g2d.jpg",
@@ -597,11 +743,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 5.038792,
         popularity: 5.038792,
         releaseDate: "2012-10-25",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 140607,
         title: "Star Wars: The Force Awakens",
         originalTitle: "Star Wars: The Force Awakens",
+        tagline: "Generic tagline Star Wars: The Force Awakens",
         overview:
           "Thirty years after defeating the Galactic Empire, Han Solo and his allies face a new threat from the evil Kylo Ren and his army of Stormtroopers.",
         posterPath: "/weUSwMdQIa3NaXVzwUoIIcAi85d.jpg",
@@ -610,11 +760,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 8.83227,
         popularity: 8.83227,
         releaseDate: "2015-12-15",
-      },
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
+      }, */
       {
-        id: 206647,
+        id: 21,
         title: "Spectre",
         originalTitle: "Spectre",
+        tagline: "Generic tagline Spectre",
         overview:
           "A cryptic message from Bond’s past sends him on a trail to uncover a sinister organization. While M battles political forces to keep the secret service alive, Bond peels back the layers of deceit to reveal the terrible truth behind SPECTRE.",
         posterPath: "/hE24GYddaxB9MVZl1CaiI86M3kp.jpg",
@@ -623,6 +777,9 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 7.090211,
         popularity: 7.090211,
         releaseDate: "2015-10-26",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
     ]),
   },
@@ -630,10 +787,11 @@ const actors: Actor[] = <Actor[]>[
     id: 287,
     name: "Brad Pitt",
     movies: <Movie[]>(<unknown>[
-      {
+      /* {
         id: 550,
         title: "Fight Club",
         originalTitle: "Fight Club",
+        tagline: "Generic tagline Fight Club",
         overview:
           'A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground "fight clubs" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion.',
         posterPath: "/811DjJTon9gD6hZ8nCjSitaIXFQ.jpg",
@@ -642,11 +800,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 6.590102,
         popularity: 6.590102,
         releaseDate: "1999-10-14",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 16869,
         title: "Inglourious Basterds",
         originalTitle: "Inglourious Basterds",
+        tagline: "Generic tagline Inglourious Basterds",
         overview:
           'In Nazi-occupied France during World War II, a group of Jewish-American soldiers known as "The Basterds" are chosen specifically to spread fear throughout the Third Reich by scalping and brutally killing Nazis. The Basterds, lead by Lt. Aldo Raine soon cross paths with a French-Jewish teenage girl who runs a movie theater in Paris which is targeted by the soldiers.',
         posterPath: "/6zYuTKyvcwmtNvXXvJZNT0IgBL0.jpg",
@@ -655,11 +817,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 5.650904,
         popularity: 5.650904,
         releaseDate: "2009-08-18",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 72190,
         title: "World War Z",
         originalTitle: "World War Z",
+        tagline: "Generic tagline World War Z",
         overview:
           "Life for former United Nations investigator Gerry Lane and his family seems content. Suddenly, the world is plagued by a mysterious infection turning whole human populations into rampaging mindless zombies. After barely escaping the chaos, Lane is persuaded to go on a mission to investigate this disease. What follows is a perilous trek around the world where Lane must brave horrific dangers and long odds to find answers before human civilization falls.",
         posterPath: "/Ha5t0J21eyiq6Az1EXzx0iwsGH.jpg",
@@ -668,17 +834,21 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 3.205127,
         popularity: 3.205127,
         releaseDate: "2013-06-20",
-      },
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
+      }, */
     ]),
   },
   {
     id: 3223,
     name: "Robert Downey Jr.",
     movies: <Movie[]>(<unknown>[
-      {
+      /*  {
         id: 24428,
         title: "The Avengers",
         originalTitle: "The Avengers",
+        tagline: "Generic tagline The Avengers",
         overview:
           "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!",
         posterPath: "/cezWGskPY5x7GaglTTRN4Fugfb8.jpg",
@@ -687,11 +857,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 7.353212,
         popularity: 7.353212,
         releaseDate: "2012-04-25",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 68721,
         title: "Iron Man 3",
         originalTitle: "Iron Man 3",
+        tagline: "Generic tagline Iron Man 3",
         overview:
           "The brash-but-brilliant industrialist Tony Stark faces an enemy whose reach knows no bounds. When Stark finds his personal world destroyed at his enemy’s hands, he embarks on a harrowing quest to find those responsible. This journey, at every turn, will test his mettle. With his back against the wall, Stark is left to survive by his own devices, relying on his ingenuity and instincts to protect those closest to him. As he fights his way back, Stark discovers the answer to the question that has secretly haunted him: does the man make the suit or does the suit make the man?",
         posterPath: "/1Ilv6ryHUv6rt9zIsbSEJUmmbEi.jpg",
@@ -700,11 +874,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 4.993196,
         popularity: 4.993196,
         releaseDate: "2013-04-18",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 1726,
         title: "Iron Man",
         originalTitle: "Iron Man",
+        tagline: "Generic tagline Iron Man",
         overview:
           "Tony Stark. Genius, billionaire, playboy, philanthropist. Son of legendary inventor and weapons contractor Howard Stark. When Tony Stark is assigned to give a weapons presentation to an Iraqi unit led by Lt. Col. James Rhodes, he's given a ride on enemy lines. That ride ends badly when Stark's Humvee that he's riding in is attacked by enemy combatants. He survives - barely - with a chest full of shrapnel and a car battery attached to his heart. In order to survive he comes up with a way to miniaturize the battery and figures out that the battery can power something else. Thus Iron Man is born. He uses the primitive device to escape from the cave in Iraq. Once back home, he then begins work on perfecting the Iron Man suit. But the man who was put in charge of Stark Industries has plans of his own to take over Tony's technology for other matters.",
         posterPath: "/s2IG9qXfhJYxIttKyroYFBsHwzQ.jpg",
@@ -713,17 +891,21 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 6.393385,
         popularity: 6.393385,
         releaseDate: "2008-04-30",
-      },
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
+      }, */
     ]),
   },
   {
     id: 12835,
     name: "Vin Diesel",
     movies: <Movie[]>(<unknown>[
-      {
+      /* {
         id: 118340,
         title: "Guardians of the Galaxy",
         originalTitle: "Guardians of the Galaxy",
+        tagline: "Generic tagline Guardians of the Galaxy",
         overview:
           "Light years from Earth, 26 years after being abducted, Peter Quill finds himself the prime target of a manhunt after discovering an orb wanted by Ronan the Accuser.",
         posterPath: "/y31QB9kn3XSudA15tV7UWQ9XLuW.jpg",
@@ -732,11 +914,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 9.267731,
         popularity: 9.267731,
         releaseDate: "2014-07-30",
-      },
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
+      }, */
       {
-        id: 82992,
+        id: 30,
         title: "Fast & Furious 6",
         originalTitle: "Fast & Furious 6",
+        tagline: "Generic tagline Fast & Furious 6",
         overview:
           "Hobbs has Dominic and Brian reassemble their crew to take down a team of mercenaries: Dominic unexpectedly gets convoluted also facing his presumed deceased girlfriend, Letty.",
         posterPath: "/b9gTJKLdSbwcQRKzmqMq3dMfRwI.jpg",
@@ -745,11 +931,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 1.737593,
         popularity: 1.737593,
         releaseDate: "2013-05-06",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
-      {
+      /* {
         id: 857,
         title: "Saving Private Ryan",
         originalTitle: "Saving Private Ryan",
+        tagline: "Generic tagline Saving Private Ryan",
         overview:
           "As U.S. troops storm the beaches of Normandy, three brothers lie dead on the battlefield, with a fourth trapped behind enemy lines. Ranger captain John Miller and seven men are tasked with penetrating German-held territory and bringing the boy home.",
         posterPath: "/gc7IN6bWNaWXv4vI6cxSmeB7PeO.jpg",
@@ -758,17 +948,21 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 4.108465,
         popularity: 4.108465,
         releaseDate: "1998-07-24",
-      },
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
+      }, */
     ]),
   },
   {
     id: 227454,
     name: "Alicia Vikander",
     movies: <Movie[]>(<unknown>[
-      {
+      /* {
         id: 264660,
         title: "Ex Machina",
         originalTitle: "Ex Machina",
+        tagline: "Generic tagline Ex Machina",
         overview:
           "Caleb, a 26 year old coder at the world's largest internet company, wins a competition to spend a week at a private mountain retreat belonging to Nathan, the reclusive CEO of the company. But when Caleb arrives at the remote location he finds that he will have to participate in a strange and fascinating experiment in which he must interact with the world's first true artificial intelligence, housed in the body of a beautiful robot girl.",
         posterPath: "/btbRB7BrD887j5NrvjxceRDmaot.jpg",
@@ -777,11 +971,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 5.279412,
         popularity: 5.279412,
         releaseDate: "2015-01-21",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 203801,
         title: "The Man from U.N.C.L.E.",
         originalTitle: "The Man from U.N.C.L.E.",
+        tagline: "Generic tagline The Man from U.N.C.L.E.",
         overview:
           "At the height of the Cold War, a mysterious criminal organization plans to use nuclear weapons and technology to upset the fragile balance of power between the United States and Soviet Union. CIA agent Napoleon Solo and KGB agent Illya Kuryakin are forced to put aside their hostilities and work together to stop the evildoers in their tracks. The duo's only lead is the daughter of a missing German scientist, whom they must find soon to prevent a global catastrophe.",
         posterPath: "/5ttOaThDVmTpV8iragbrhdfxEep.jpg",
@@ -790,11 +988,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 6.033553,
         popularity: 6.033553,
         releaseDate: "2015-08-13",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 306819,
         title: "The Danish Girl",
         originalTitle: "The Danish Girl",
+        tagline: "Generic tagline The Danish Girl",
         overview:
           "When Gerda Wegener asks her husband Einar to fill in as a portrait model, Einar discovers the person she's meant to be and begins living her life as Lili Elbe. Having realized her true self and with Gerda's love and support, Lili embarks on a groundbreaking journey as a transgender pioneer.",
         posterPath: "/seWQ6UKCrhGH0eP7dFZvmIBQtKF.jpg",
@@ -803,17 +1005,21 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 3.395735,
         popularity: 3.395735,
         releaseDate: "2015-11-27",
-      },
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
+      }, */
     ]),
   },
   {
     id: 1892,
     name: "Matt Damon",
     movies: <Movie[]>(<unknown>[
-      {
+      /* {
         id: 157336,
         title: "Interstellar",
         originalTitle: "Interstellar",
+        tagline: "Generic tagline Interstellar",
         overview:
           "Interstellar chronicles the adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.",
         posterPath: "/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg",
@@ -822,11 +1028,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 12.481061,
         popularity: 12.481061,
         releaseDate: "2014-11-05",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 286217,
         title: "The Martian",
         originalTitle: "The Martian",
+        tagline: "Generic tagline The Martian",
         overview:
           "During a manned mission to Mars, Astronaut Mark Watney is presumed dead after a fierce storm and left behind by his crew. But Watney has survived and finds himself stranded and alone on the hostile planet. With only meager supplies, he must draw upon his ingenuity, wit and spirit to subsist and find a way to signal to Earth that he is alive.",
         posterPath: "/5aGhaIHYuQbqlHWvWYqMCnj40y2.jpg",
@@ -835,11 +1045,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 9.539478,
         popularity: 9.539478,
         releaseDate: "2015-09-30",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 857,
         title: "Saving Private Ryan",
         originalTitle: "Saving Private Ryan",
+        tagline: "Generic tagline Saving Private Ryan",
         overview:
           "As U.S. troops storm the beaches of Normandy, three brothers lie dead on the battlefield, with a fourth trapped behind enemy lines. Ranger captain John Miller and seven men are tasked with penetrating German-held territory and bringing the boy home.",
         posterPath: "/gc7IN6bWNaWXv4vI6cxSmeB7PeO.jpg",
@@ -848,17 +1062,21 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 4.108465,
         popularity: 4.108465,
         releaseDate: "1998-07-24",
-      },
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
+      }, */
     ]),
   },
   {
     id: 3293,
     name: "Rachel Weisz",
     movies: <Movie[]>(<unknown>[
-      {
+      /* {
         id: 68728,
         title: "Oz: The Great and Powerful",
         originalTitle: "Oz: The Great and Powerful",
+        tagline: "Generic tagline Oz: The Great and Powerful",
         overview:
           "Oscar Diggs, a small-time circus illusionist and con-artist, is whisked from Kansas to the Land of Oz where the inhabitants assume he's the great wizard of prophecy, there to save Oz from the clutches of evil.",
         posterPath: "/7qzLIcYR7ev7iXngY8NKHBZHwwT.jpg",
@@ -867,11 +1085,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 3.438461,
         popularity: 3.438461,
         releaseDate: "2013-03-07",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 49040,
         title: "The Bourne Legacy",
         originalTitle: "The Bourne Legacy",
+        tagline: "Generic tagline The Bourne Legacy",
         overview:
           "The fourth installment of the highly successful Bourne series sidelines main character Jason Bourne in order to focus on a fellow estranged assassin Aaron Cross. The story centers on new CIA operative, Aaron Cross as he experiences life-or-death stakes that have been triggered by the previous actions of Jason Bourne.",
         posterPath: "/AnKnLsybNhnibvA3mba1ct9Nnb6.jpg",
@@ -880,11 +1102,15 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 4.976063,
         popularity: 4.976063,
         releaseDate: "2012-08-08",
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
       },
       {
         id: 564,
         title: "The Mummy",
         originalTitle: "The Mummy",
+        tagline: "Generic tagline The Mummy",
         overview:
           "Dashing legionnaire Rick O'Connell and Beni, his weasel of a companion, stumble upon the hidden ruins of Hamunaptra while in the midst of a battle in 1923, 3,000 years after Imhotep has suffered a fate worse than death; his body will remain undead for all eternity as a punishment for a forbidden love.",
         posterPath: "/cftmDzVCWKynKMfY9oyFj7igFqJ.jpg",
@@ -893,7 +1119,10 @@ const actors: Actor[] = <Actor[]>[
         voteAverage: 3.271678,
         popularity: 3.271678,
         releaseDate: "1999-05-06",
-      },
+        status: "Released",
+        revenue: 1234596,
+        budget: 1987540,
+      }, */
     ]),
   },
 ];

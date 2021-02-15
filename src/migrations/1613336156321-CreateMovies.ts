@@ -4,7 +4,7 @@ import { getRepository, MigrationInterface, QueryRunner } from "typeorm";
 import { Movie } from "../models/Movie";
 import movies from "./Movies.seed";
 
-export class CreateMovies1613356156321 implements MigrationInterface {
+export class CreateMovies1613336156321 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     try {
       const movieRepository = getRepository(Movie);

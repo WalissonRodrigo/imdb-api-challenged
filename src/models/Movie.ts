@@ -51,7 +51,7 @@ export class Movie {
   @IsNotEmpty()
   originalTitle: string;
 
-  @Column({ length: 620 })
+  @Column({ length: 1000 })
   @IsNotEmpty()
   overview: string;
 
