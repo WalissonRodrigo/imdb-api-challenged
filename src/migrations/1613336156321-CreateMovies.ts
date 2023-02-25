@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { EROFS } from "constants";
 import { getRepository, MigrationInterface, QueryRunner } from "typeorm";
 import { Movie } from "../models/Movie";
 import movies from "./Movies.seed";

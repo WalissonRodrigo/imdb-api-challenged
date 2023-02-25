@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-var dotenv = require("dotenv");
+const dotenv = require("dotenv");
 dotenv.config();
 
 const builderUrl = () => {
