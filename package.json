@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Teste de Node.JS para criar uma API Rest de filmes para o IMDb",
   "main": "./src/index.ts",
-  "repository": "https://WalissonRodrigo@bitbucket.org/ioasys/teste-backend.git",
+  "repository": "https://github.com/WalissonRodrigo/imdb-api-challenged",
   "author": "Walisson Rodrigo <walissonrodrigo@outlook.com>",
   "license": "MIT",
   "private": true,

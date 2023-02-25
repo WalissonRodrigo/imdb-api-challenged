@@ -89,8 +89,8 @@ Siga as etapas para executar o projeto:
 7. Acesse no seu servidor local a rota http://localhost:3000/api-docs `/api-docs` para testar a api usando o swagger.
 
 
-# Quer testar a API sem instalar? Use o link abaixo
+<!-- # Quer testar a API sem instalar? Use o link abaixo
 
 Versão de produção com dados disponíveis para testes.
 
-https://imdbteste.herokuapp.com/api-docs/
+https://imdbteste.herokuapp.com/api-docs/ -->
